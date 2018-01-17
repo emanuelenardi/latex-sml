@@ -1,0 +1,16 @@
+\section{Febbraio 2017}
+
+\subsection{Testo}
+
+Si implementi la funzione \sml{unione}, avente tipo \sml{insiemediinteri -> insiemediinteri -> insiemediinteri}, che dati due insiemi di interi ne calcola l'unione.
+
+\subsection{Soluzione}
+
+\begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{unione}}]
+val unione = fn i1:insiemediinteri => fn i2:insiemediinteri =>
+	(fn n =>
+		((contiene i1 n) orelse (contiene i2 n))
+	):insiemediinteri;
+
+val unione = fn: insiemediinteri -> insiemediinteri -> insiemediinteri
+\end{lstlisting}

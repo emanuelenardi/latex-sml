@@ -1,0 +1,39 @@
+\section{Luglio 2015}
+
+\subsection{Testo}
+
+Si consideri il seguente tipo di dato, che rappresenta una semplice espressione avente due argomenti x e y:
+
+\begin{lstlisting}[style = SML, caption = {Definizione del tipo di dato \sml{espressione Lambda}}]
+datatype Expr = X
+			  | Y
+			  | Avg of Expr * Expr
+			  | Mul of Expr * Expr
+\end{lstlisting}
+
+dove il costruttore \sml{X} rappresenta il valore del primo argomento \sml{x} dell'espressione, %
+il costruttore \sml{Y} rappresenta il valore del secondo argomento \sml{y}, %
+il costruttore \sml{Avg}, che si applica ad una coppia \sml{(e1, e2)}, rappresenta la media (intera) dei valori di \sml{e1} ed \sml{e2}, %
+mentre il costruttore \sml{Mul} (che ancora si applica ad una coppia \sml{(e1, e2)}) rappresenta il prodotto dei valori di due espressioni \sml{e1} ed \sml{e2}.
+
+\medskip
+Implementare una funzione Standard ML, chiamata \sml{compute}, che ha tipo \sml{Expr -> int -> int -> int}.
+
+\medskip
+Come suggerito dal nome, compute calcola il valore dell'espressione ricevuta come primo argomento, applicandola ai valori ricevuti come secondo e terzo argomento e ritorna un intero che indica il risultato finale della valutazione.
+
+\medskip
+\textbf{IMPORTANTE}: notare il tipo della funzione! Come si può intuire da tale tipo, la funzione riceve tre argomenti usando la \emph{tecnica del currying}. \'E importante che la funzione abbia il tipo corretto (indicato qui sopra). Una funzione avente tipo diverso da \sml{Expr -> int -> int -> int} non sarà considerata corretta.
+
+\subsection{Soluzione}
+
+\begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{compute}}]
+val rec compute = fn X		 	 => (fn x => fn y => x)
+				   | Y			 => (fn x => fn y => y)
+				   | Avg(e1, e2) => (fn x => fn y =>
+				   					((compute e1 x y) + (compute e2 x y)) div 2)
+				   | Mul(e1, e2) => (fn x => fn y =>
+				   					(compute e1 x y) * (compute e2 x y))
+
+val compute = fn: Expr -> int -> int -> int
+\end{lstlisting}

@@ -1,0 +1,59 @@
+\section{Settembre 2015}
+
+\subsection{Testo}
+
+Si consideri il seguente tipo di dato:
+
+\begin{lstlisting}[style = SML, caption = {Definizione del tipo di dato \sml{codice}}]
+datatype codice = rosso of string
+				| giallo of string
+				| verde of string;
+\end{lstlisting}
+
+che rappresenta un paziente in arrivo al pronto soccorso.
+
+\medskip
+La stringa rappresenta il cognome del paziente, mentre i tre diversi costruttori \sml{rosso}, \sml{giallo} e \sml{verde} rappresentano la gravità del paziente (codice \sml{rosso}: massima gravità/urgenza, codice \sml{verde}: minima gravità/urgenza).
+
+\medskip
+Quando un paziente con codice \sml{rosso} arriva al pronto soccorso, viene messo in lista d'attesa dopo tutti i pazienti con codice \sml{rosso} (ma prima di quelli con codice \sml{giallo} o verde); quando arriva un paziente con codice \sml{giallo}, viene messo in lista d'attesa dopo tutti i pazienti con codice \sml{rosso} o \sml{giallo} (ma prima di quelli con codice \sml{verde}), mentre quando arriva un paziente con codice \sml{verde} viene messo in lista d'attesa dopo tutti gli altri pazienti.
+
+\medskip
+Si scriva una funzione arriva (avente tipo codice \sml{list -> codice -> codice list}) che riceve come argomenti la lista dei pazienti in attesa (lista di elementi di tipo codice) ed un paziente appena arrivato (elemento di tipo codice) e ritorna la lista aggiornata dei pazienti in attesa (dopo aver inserito il nuovo paziente nel giusto posto in coda).
+
+\medskip
+Come esempio, l'invocazione
+
+\begin{lstlisting}
+arriva [rosso "topolino", rosso "cip", giallo "ciop", verde "paperino", verde "pluto"] (giallo "clarabella");}
+\end{lstlisting}
+
+deve avere risultato
+
+\begin{lstlisting}
+[rosso "topolino", rosso "cip", giallo "ciop", giallo "clarabella", verde "paperino", verde "pluto"]}
+\end{lstlisting}
+
+\medskip
+\textbf{IMPORTANTE}: notare il tipo della funzione! Si noti inoltre che la funzione usa la \emph{tecnica del currying} per gestire i due argomenti.
+
+\subsection{Soluzione}
+
+\begin{lstlisting}[style = SML, nolol = true, caption = {Definizione del tipo di dato \sml{codice}}]
+datatype codice = rosso of string
+				| giallo of string
+				| verde of string;
+\end{lstlisting}
+
+\begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{arriva}}]
+val rec arriva = fn
+		    []			  => (fn x => [x])
+		  | (verde  n)::l => (fn (verde  nn) => (verde  n)::(arriva l (verde nn))
+							   | x           => x::((verde n)::l))
+		  | (giallo n)::l => (fn (verde  nn) => (giallo n)::(arriva l (verde nn))
+		  					   | (giallo nn) => (giallo n)::(arriva l (giallo nn))
+							   | x           => x::((giallo n)::l))
+		  | (rosso  n)::l => (fn x => (rosso n)::(arriva l x));
+
+val arriva = fn: codice list -> codice -> codice list
+\end{lstlisting}

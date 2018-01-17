@@ -1,0 +1,139 @@
+\section{Luglio 2016}
+
+\subsection{1\textsuperscript{o} Turno}
+
+\subsubsection{Testo}
+
+Si consideri il tipo di dato
+
+\begin{lstlisting}[style = SML, caption = {Definizione del tipo di dato \sml{espressione Lambda}}]
+datatype lambda_expr = Var of string
+					 | Lambda of string * lambda_expr
+					 | Apply of lambda_expr * lambda_expr;
+\end{lstlisting}
+
+che rappresenta un'espressione del Lambda-calcolo.
+
+\medskip
+Il costruttore \sml{Var} crea un'espressione costituita da un'unica funzione / variabile (il cui nome è un valore di tipo \sml{string});
+il costruttore Lambda crea una Lambda-espressione a partire da un'altra espressione, legandone una variabile (indicata da un valore di tipo string);
+il costruttore \sml{Apply} crea un'espressione data dall'applicazione di un'espressione ad un'altra.
+
+\medskip
+Si scriva una funzione \sml{is\_free} (avente tipo \sml{string -> lambda\_expr -> bool}) che riceve come argomenti una stringa (che rappresenta il nome di una variabile / funzione) ed una Lambda-espressione, %
+ritornando true se la variabile indicata appare come libera nell'espressione, %
+false altrimenti (quindi, la funzione ritorna false se la variabile è legata o se non appare nell'epressione).
+
+\medskip
+Come esempio, l'invocazione
+
+\begin{lstlisting}
+is_free "a" (Var "a")
+\end{lstlisting}
+
+deve avere risultato true, l'invocazione
+
+\begin{lstlisting}
+is_free "b" (Var "a")
+\end{lstlisting}
+
+deve avere risultato false, l'invocazione
+
+\begin{lstlisting}
+is_free "a" (Lambda ("a", Apply((Var "a"), Var "b")))
+\end{lstlisting}
+
+deve avere risultato false, l'invocazione
+
+\begin{lstlisting}
+is_free "b" (Lambda ("a", Apply((Var "a"), Var "b")))
+\end{lstlisting}
+
+deve avere risultato true e così via.
+
+\medskip
+\textbf{IMPORTANTE}: notare il tipo della funzione! La funzione usa la \emph{tecnica del currying} per gestire i due argomenti.
+
+\subsubsection{Soluzione}
+
+\begin{lstlisting}[style = SML, nolol = true, caption = {Definizione del tipo di dato \sml{espressione Lambda}}]
+datatype lambda_expr = Var of string
+					 | Lambda of string * lambda_expr
+					 | Apply of lambda_expr * lambda_expr;
+\end{lstlisting}
+
+\begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{is\_free}}]
+val rec is_free = fn s => fn Var v => s = v
+				| Lambda (v, e) => if (s = v) then
+									   false
+								   else
+									   is_free s e
+				| Apply (e1, e2) => (is_free s e1) orelse (is_free s e2);
+
+val is_free = fn: string -> lambda_expr -> bool
+\end{lstlisting}
+
+\subsection{2\textsuperscript{o} Turno}
+
+\subsubsection{Testo}
+
+Basandosi sul tipo di dato \sml{espressione} e la funzione \sml{eval} definiti come segue:
+
+\begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{semplifica}}]
+local
+	val rec eval = fn costante		n        => n
+					| somma			(a1, a2) => (eval a1) + (eval a2)
+					| sottrazione	(a1, a2) => (eval a1) - (eval a2)
+					| prodotto		(a1, a2) => (eval a1) * (eval a2)
+					| divisione		(a1, a2) => (eval a1) div (eval a2);
+in
+	val semplifica = fn costante	n        => costante(n)
+					  | somma		(a1, a2) => costante((eval a1) + (eval a2))
+					  | sottrazione	(a1, a2) => costante((eval a1) - (eval a2))
+					  | prodotto	(a1, a2) => costante((eval a1) * (eval a2))
+					  | divisione	(a1, a2) => costante((eval a1) div (eval a2))
+end;
+
+(tipo funzione)
+\end{lstlisting}
+
+il tipo espressione può essere esteso come segue per supporare il concetto di variabile:
+
+\begin{lstlisting}[style = SML, caption = {Definizione del tipo di dato \sml{espressione}}]
+datatype espressione = costante    of int
+					 | variabile   of string
+					 | somma       of espressione * espressione
+					 | sottrazione of espressione * espressione
+					 | prodotto    of espressione * espressione
+					 | divisione   of espressione * espressione
+					 | var         of string      * espressione * espressione;
+\end{lstlisting}
+
+Si riscriva la funzione \sml{eval} per supportare i due nuovi costruttori \sml{variabile} e \sml{var. variabile x}, con \sml{x} di tipo stringa, é valutata al valore della variabile di nome \sml{x} (per fare questo, \sml{eval} deve cercare nell'ambiente un legame fra tale nome ed un valore). %
+\sml{var (x, e1, e2)} é valutata al valore di \sml{e2} dopo aver assegnato ad \sml{x} il valore di \sml{e1}.
+
+\medskip
+Per poter valutare correttamente \sml{variabile} e \sml{var}, \sml{eval} deve quindi ricevere come argomento l'ambiente in cui valutare le variabili. %
+Tale ambiente può essere rappresentato come una lista di coppie (stringa, intero) ed avra' quindi tipo \sml{(string * int) list}.
+
+\medskip
+La funzione \sml{eval} deve quindi avere tipo \sml{(string * int) list -> espressione -> int}.
+
+\subsubsection{Soluzione}
+
+Questa é una possibile soluzione. %
+Si noti che in questa soluzione la funzione \sml{cerca} viene definita come visibile a tutti, mentre sarebbe più opportuno renderla locale a \sml{eval} usando un costrutto \sml{let} o \sml{local}.
+
+\begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{eval}}]
+val rec cerca = fn s => fn [] => 0
+						 | (s1, v)::l => if s1 = s then v else cerca s l;
+
+val rec eval = fn env =>
+			   fn costante    n           => n
+				| variabile   s           => cerca s env
+				| somma       (a1, a2)    => (eval env a1) +   (eval env a2)
+				| sottrazione (a1, a2)    => (eval env a1) -   (eval env a2)
+				| prodotto    (a1, a2)    => (eval env a1) *   (eval env a2)
+				| divisione   (a1, a2)    => (eval env a1) div (eval env a2)
+				| var         (v, e1, e2) => eval ((v, eval env e1)::env) e2;
+\end{lstlisting}

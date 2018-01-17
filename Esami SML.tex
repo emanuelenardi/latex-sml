@@ -1,0 +1,53 @@
+\input{Impostazioni/set_pdfInfo}
+\input{preamble}
+\input{mystyle}
+
+\input{set_listing}
+
+\input{define_languages}
+\input{define_styles}
+
+% Non stampa il no. delle sezioni
+\setcounter{secnumdepth}{0}
+
+\begin{document}
+
+	\input{Impostazioni/pagina_iniziale}
+	\afterpage{\blankpage}
+	\clearpage
+
+	\pagestyle{footer}
+
+	\input{Impostazioni/introduzione}
+	\afterpage{\blankpage}
+	\clearpage
+
+	\input{Esami/2015.06}
+	\newpage
+	\input{Esami/2015.07}
+	\newpage
+	\input{Esami/2015.08}
+	\newpage
+	\input{Esami/2015.09}
+	\newpage
+	\input{Esami/2016.06}
+	\newpage
+	\input{Esami/2016.07}
+	\newpage
+	\input{Esami/2016.08}
+	\newpage
+	\input{Esami/2017.01}
+	\newpage
+	\input{Esami/2017.02}
+	\newpage
+	\input{Esami/2017.06}
+	\newpage
+	\input{Esami/2017.07}
+	\newpage
+	\input{Esami/2017.09}
+	\newpage
+
+	\thispagestyle{footer}
+
+	\input{Esami/2018.01}
+\end{document}

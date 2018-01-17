@@ -1,0 +1,52 @@
+\section{Settembre 2017}
+
+\subsection{Testo}
+
+Si consideri il tipo di dato
+
+\begin{lstlisting}
+datatype intonil = Nil | Int of int
+\end{lstlisting}
+
+ed una possibile implementazione semplificata di ambiente (che considera solo valori interi) basata su di esso:
+
+\begin{lstlisting}
+type ambiente = string -> intonil
+\end{lstlisting}
+
+In questa implementazione, un ambiente è rappresentato da una funzione che mappa nomi (valori di tipo \sml{string}) in valori di tipo \sml{intonil} (che rappresentano un intero o nessun valore). Tale funzione applicata ad un nome ritorna il valore intero ad esso associato oppure \sml{Nil}.
+
+\medskip
+Usando questa convenzione, l'ambiente vuoto (in cui nessun nome è associato a valori) può essere definito come:
+
+\begin{lstlisting}
+val ambientevuoto = fn _:string => Nil;
+\end{lstlisting}
+
+Basandosi su queste definizioni, si definisca una funzione "\sml{lega}" con tipo "\sml{ambiente -> string -> int -> ambiente}". che a partire da un ambiente (primo argomento) genera un nuovo ambiente (valore di ritorno) uguale al primo argomento più un legame fra il nome e l'intero ricevuti come secondo e terzo argomento.
+
+\medskip
+\textbf{IMPORTANTE}: notare il tipo della funzione! Come si può intuire da tale tipo, usa la \emph{tecnica del currying} per gestire i suoi due argomenti.
+
+\medskip
+A titolo di esempio:
+
+\begin{itemize}
+  \item \sml{((lega ambientevuoto "a" 1) "a")} deve ritornare \sml{Int 1};
+  \item \sml{((lega ambientevuoto "a" 1) "boh")} deve ritornare \sml{Nil};
+  \item \sml{((lega (lega ambientevuoto "a" 1) "boh" ~1) "boh")} deve ritornare \sml{Int ~1};
+  \item \sml{((lega (lega ambientevuoto "a" 1) "boh" ~1) "mah")} deve ritornare \sml{Nil}.
+\end{itemize}
+
+\subsection{Soluzione}
+
+\begin{lstlisting}
+val lega = fn e:ambiente =>
+	fn nome =>
+		fn valore =>
+			(fn n => if (n = nome)
+			    then
+					(Int valore)
+			    else
+					(e n)): ambiente;
+\end{lstlisting}

@@ -1,0 +1,76 @@
+\section{Giugno 2016}
+
+\subsection{1\textsuperscript{o} Turno}
+
+\subsubsection{Testo}
+
+Si scriva una funzione \sml{hist} (avente tipo \sml{real list -> real * real -> int}) che riceve come argomento una lista di \sml{real l} ed una coppia di \sml{real (c, d)}.
+La funzione \sml{hist} ritorna il numero di elementi della lista compresi nell'intervallo \sml{(c - d, c + d)}, estremi esclusi (vale a dire il numero di elementi \sml{r} tali che \sml{(c - d < r < c + d)}.
+
+\medskip
+Come esempio, l'invocazione
+
+\begin{lstlisting}
+hist [0.1, 0.5, 1.0, 3.0, 2.5] (1.0, 0.5);
+\end{lstlisting}
+
+deve avere risultato 1;
+
+\begin{lstlisting}
+e hist [0.1, 0.5, 1.0, 3.0, 2.5] (1.0, 0.6);
+\end{lstlisting}
+
+deve avere risultato 2.
+
+\subsubsection{Soluzione}
+
+\begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{hist}}]
+val rec hist = fn []	   => (fn (c:real, d:real) => 0)
+				| [e]	   => (fn (c:real, d:real) =>
+											if (e > (c-d) andalso e < (c+d)) then
+												1
+											else
+												0)
+				| (e :: l) => (fn (c:real, d:real) =>
+											if (e > (c-d) andalso e < (c+d )) then
+												1 + hist l (c, d)
+											else
+												0 + hist l (c, d));
+
+val hist = fn: real list -> real * real -> int
+\end{lstlisting}
+
+\subsection{2\textsuperscript{o} Turno}
+
+\subsubsection{Testo}
+
+Si scriva una funzione \sml{noduplen} (avente tipo \sml{''a list -> int}) che riceve come argomento una lista di \sml{''a l}.
+La funzione \sml{noduplen} ritorna il numero di elementi della lista senza considerare i duplicati.
+
+\medskip
+Come esempio, l'invocazione
+
+\begin{lstlisting}
+noduplen ["pera", "pera", "pera", "pera"];
+\end{lstlisting}
+
+deve avere risultato 1;
+
+\begin{lstlisting}
+noduplen ["red", "red", "green", "blue"];
+\end{lstlisting}
+
+deve avere risultato 3.
+
+\subsubsection{Soluzione}
+
+\begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{noduplen}}]
+val rec noduplen = fn []		=> 0
+					| [a]		=> 1
+					| a::(b::l)	=> if (a <> b) then
+										1 + noduplen (b::l)
+									else
+										0 + noduplen (b::l);
+
+val noduplen = fn: ''a list -> int
+\end{lstlisting}

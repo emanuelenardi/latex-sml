@@ -1,0 +1,78 @@
+\section{Giugno 2017}
+
+\subsection{1\textsuperscript{o} Turno}
+
+\subsubsection{Testo}
+
+Si scriva una funzione \sml{sommali} (avente tipo \sml{int -> int list -> int}) che riceve come argomento un intero \sml{n} ed una lista di interi \sml{l}.
+La funzione \sml{sommali} somma ad \sml{n} gli elementi di \sml{l} che hanno posizione \emph{pari} (se la lista contiene meno di 2 elementi, \sml{sommali} ritorna \sml{n}).
+
+\medskip
+Come esempio, l'invocazione
+
+\begin{lstlisting}
+sommali 0 [1,2];
+\end{lstlisting}
+
+deve avere risultato 2;
+
+\begin{lstlisting}
+sommali 1 [1,2,3];
+\end{lstlisting}
+
+deve avere risultato 3;
+
+\begin{lstlisting}
+sommali 2 [1,2,3,4];
+\end{lstlisting}
+
+deve avere risultato 8.
+
+\subsubsection{Soluzione}
+
+\begin{lstlisting}[style = SML, caption = {[Definizione della funzione \sml{sommali} - 1\textsuperscript{o} Turno]Definizione della funzione \sml{sommali}}]
+val rec sommali = fn z => fn []     => z
+						| v::[]     => z
+						| v1::v2::l => v2 + (sommali z l);
+
+val sommali = fn: int -> int list -> int
+\end{lstlisting}
+
+\subsection{2\textsuperscript{o} Turno}
+
+\subsubsection{Testo}
+
+Si scriva una funzione \sml{sommali} (avente tipo \sml{int -> int list -> int}) che riceve come argomento un intero \sml{n} ed una lista di interi \sml{l}.
+La funzione \sml{sommali} somma ad \sml{n} gli elementi di \sml{l} che hanno posizione \emph{multipla di 3} (se la lista contiene meno di 3 elementi, \sml{sommali} ritorna \sml{n}).
+
+\medskip
+Come esempio, l'invocazione
+
+\begin{lstlisting}
+sommali 0 [1,2,3];
+\end{lstlisting}
+
+deve avere risultato 3,
+
+\begin{lstlisting}
+sommali 1 [1,2,3];
+\end{lstlisting}
+
+deve avere risultato 4: e
+
+\begin{lstlisting}
+sommali 2 [1,2,3,4,5,6];
+\end{lstlisting}
+
+deve avere risultato 11.
+
+\subsubsection{Soluzione}
+
+\begin{lstlisting}[style = SML, caption = {[Definizione della funzione \sml{sommali} - 2\textsuperscript{o} Turno]Definizione della funzione \sml{sommali}}]
+val rec sommali = fn z => fn []          => z
+						| v::[]          => z
+						| v1::v2::[]     => z
+						| v1::v2::v3::l  => v3 + (sommali z l);
+
+val sommali = fn: int -> int list -> int
+\end{lstlisting}
