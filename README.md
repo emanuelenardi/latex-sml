@@ -7,6 +7,6 @@ Fork this repository, make your changes and then issue a pull request. If you fi
 
 ## Copyright
 
-Copyright (c) 2017 Emanuele Nardi.
+Copyright (c) 2017, 2018 Emanuele Nardi.
 
 License: MIT
