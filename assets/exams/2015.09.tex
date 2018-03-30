@@ -4,7 +4,7 @@
 
 Si consideri il seguente tipo di dato:
 
-\begin{lstlisting}[style = SML, caption = {Definizione del tipo di dato \sml{codice}}]
+\begin{lstlisting}[style = SML, nolol = true, caption = {Definizione del tipo di dato \sml{codice}}]
 datatype codice = rosso of string
 				| giallo of string
 				| verde of string;
@@ -19,7 +19,7 @@ La stringa rappresenta il cognome del paziente, mentre i tre diversi costruttori
 Quando un paziente con codice \sml{rosso} arriva al pronto soccorso, viene messo in lista d'attesa dopo tutti i pazienti con codice \sml{rosso} (ma prima di quelli con codice \sml{giallo} o verde); quando arriva un paziente con codice \sml{giallo}, viene messo in lista d'attesa dopo tutti i pazienti con codice \sml{rosso} o \sml{giallo} (ma prima di quelli con codice \sml{verde}), mentre quando arriva un paziente con codice \sml{verde} viene messo in lista d'attesa dopo tutti gli altri pazienti.
 
 \medskip
-Si scriva una funzione arriva (avente tipo codice \sml{list -> codice -> codice list}) che riceve come argomenti la lista dei pazienti in attesa (lista di elementi di tipo codice) ed un paziente appena arrivato (elemento di tipo codice) e ritorna la lista aggiornata dei pazienti in attesa (dopo aver inserito il nuovo paziente nel giusto posto in coda).
+Si scriva una funzione \sml{arriva} (avente tipo \sml{codice list -> codice -> codice list}) che riceve come argomenti la lista dei pazienti in attesa (lista di elementi di tipo codice) ed un paziente appena arrivato (elemento di tipo codice) e ritorna la lista aggiornata dei pazienti in attesa (dopo aver inserito il nuovo paziente nel giusto posto in coda).
 
 \medskip
 Come esempio, l'invocazione
@@ -48,12 +48,20 @@ datatype codice = rosso of string
 \begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{arriva}}]
 val rec arriva = fn
 		    []			  => (fn x => [x])
-		  | (verde  n)::l => (fn (verde  nn) => (verde  n)::(arriva l (verde nn))
-							   | x           => x::((verde n)::l))
-		  | (giallo n)::l => (fn (verde  nn) => (giallo n)::(arriva l (verde nn))
-		  					   | (giallo nn) => (giallo n)::(arriva l (giallo nn))
-							   | x           => x::((giallo n)::l))
-		  | (rosso  n)::l => (fn x => (rosso n)::(arriva l x));
+		  | (+++verde  n+++)::l => (fn (†verde  nn†) => (+++verde n+++)::(arriva l (†verde nn†))
+							   | x           => x::((+++verde n+++)::l))
+		  | (‡giallo n‡)::l => (fn (†verde  nn†) => (‡giallo n‡)::(arriva l (†verde nn†))
+		  					   | (Šgiallo nnŠ) => (‡giallo n‡)::(arriva l (Šgiallo nnŠ))
+							   | x           => x::((‡giallo n‡)::l))
+		  | (---rosso  n---)::l => (fn x => (---rosso n---)::(arriva l x));
 
 val arriva = fn: codice list -> codice -> codice list
 \end{lstlisting}
+
+\subsection{Commento della soluzione}
+
+\begin{itemize}
+	\item \sml{(+++verde n+++)::(arriva l (†verde nn†))} implementa \sml{verde to verde)};
+	\item \sml{(‡giallo n‡)::(arriva l (†verde nn†))} implementa \sml{giallo to verde)};
+	\item \sml{(‡giallo n‡)::(arriva l (Šgiallo nnŠ))} implementa \sml{giallo to giallo)}.
+\end{itemize}

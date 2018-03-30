@@ -1,4 +1,5 @@
 # LaTeX-SML
+
 Collection of exams of the functional programming course held at UNITN
 
 ## Contribute

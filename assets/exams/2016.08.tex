@@ -37,7 +37,7 @@ val contiene = fn f:insiemediinteri => fn n:int => f n;
 
 Si implementi la funzione \sml{intersezione}, avente tipo \sml{insiemediinteri -> insiemediinteri -> insiemediinteri}, che dati due insiemi di interi ne calcola l'intersezione.
 
-\textbf{IMPORTANTE}: notare il tipo della funzione! Come si puo' intuire da tale tipo, usa la \emph{tecnica del currying} per gestire i suoi due argomenti.
+\textbf{IMPORTANTE}: notare il tipo della funzione! Come si può intuire da tale tipo, usa la \emph{tecnica del currying} per gestire i suoi due argomenti.
 
 \subsection{Soluzione}
 
@@ -49,3 +49,7 @@ val intersezione = fn i1:insiemediinteri => fn i2:insiemediinteri =>
 
 val intersezione = fn: insiemediinteri -> insiemediinteri -> insiemediinteri
 \end{lstlisting}
+
+\subsection{commento della soluzione}
+
+Si può arrivare alla soluzione per passi.

@@ -1,0 +1,40 @@
+\section{Agosto 2015}
+
+\subsection{Testo}
+
+Scrivere una funzione Standard ML, chiamata \sml{elementi\_pari}, che ha tipo \sml{'a list -> 'a list}. La funzione riceve come parametro una \(\alpha\)-lista e ritorna una \(\alpha\)-lista contenente gli elementi della lista di ingresso che hanno posizione \emph{pari} (il secondo elemento, il quarto elemento, etc\dots).
+
+\medskip
+Per esempio
+
+\begin{lstlisting}[style = SML]
+elementi_pari [1,‡5‡,2,‡10‡]
+\end{lstlisting}
+
+ritorna
+
+\begin{lstlisting}[style = SML]
+[‡5‡,‡10‡]
+\end{lstlisting}
+
+\medskip
+Si noti inoltre che la funzione \sml{elementi\_pari} non deve cambiare l'ordine degli elementi della lista rispetto all'ordine della lista ricevuta come argomento (considerando l'esempio precedente, il valore ritornato deve essere \sml{[5,10]}, non \sml{[10,5]}).
+
+\medskip
+Si noti che la funzione \sml{elementi\_pari} può usare i costruttori forniti da Standard ML per le \(\alpha\)-liste, senza bisogno di definire alcun \sml{datatype} o altro.
+
+\subsection{Soluzione}
+
+\begin{lstlisting}[style = SML, caption={Definizione della funzione \sml{elementi\_pari}}]
+val rec elementi_pari = fn +++[]+++         => +++[]+++
+						| +++[v]+++         => +++[]+++
+						| ‡a::(b‡::ŠlŠ) => ‡b‡::(Šelementi_pari lŠ)
+
+val elementi_pari = fn:'a list -> 'a list
+\end{lstlisting}
+
+\subsection{Commento della soluzione}
+
+Si può arrivare alla soluzione affrontando il problema in modo ricorsivo. %
+Risolvendo prima i casi base: nei quali bisogna gestire la {\greenHL restituzione di una lista vuota} (\sml{[]}) o contenga un solo elemento (\sml{[v]}) in entrambi i casi restituiamo una \(\alpha\)-lista vuota, in quanto non esistono elementi pari.
+Nel caso più interessante, cioè quello in cui sono presenti uno o più elementi in una posizione pari, {\yellowHL la lista viene letta due elementi alla volta (\sml{a} e \sml{b}) di cui si tiene solo il secondo elemento} (quello in una posizione pari), per poi effettuare una {\orangeHL chiamata ricorsiva della funzione sulla coda della lista} che è composta dalla lista passata precedentemente alla funzione a meno dei primi due elementi (\sml{a} e \sml{b}).

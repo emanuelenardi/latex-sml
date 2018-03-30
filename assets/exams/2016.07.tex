@@ -15,37 +15,37 @@ datatype lambda_expr = Var of string
 che rappresenta un'espressione del Lambda-calcolo.
 
 \medskip
-Il costruttore \sml{Var} crea un'espressione costituita da un'unica funzione / variabile (il cui nome è un valore di tipo \sml{string});
+Il costruttore \sml{Var} crea un'espressione costituita da un'unica funzione/variabile (il cui nome è un valore di tipo \sml{string});
 il costruttore Lambda crea una Lambda-espressione a partire da un'altra espressione, legandone una variabile (indicata da un valore di tipo string);
 il costruttore \sml{Apply} crea un'espressione data dall'applicazione di un'espressione ad un'altra.
 
 \medskip
 Si scriva una funzione \sml{is\_free} (avente tipo \sml{string -> lambda\_expr -> bool}) che riceve come argomenti una stringa (che rappresenta il nome di una variabile / funzione) ed una Lambda-espressione, %
-ritornando true se la variabile indicata appare come libera nell'espressione, %
-false altrimenti (quindi, la funzione ritorna false se la variabile è legata o se non appare nell'epressione).
+ritornando \sml{true} se \emph{la variabile indicata appare come libera nell'espressione}, %
+\sml{false} altrimenti (quindi, la funzione ritorna false se la variabile è legata o se non appare nell'epressione).
 
 \medskip
 Come esempio, l'invocazione
 
-\begin{lstlisting}
+\begin{lstlisting}[style = SML]
 is_free "a" (Var "a")
 \end{lstlisting}
 
 deve avere risultato true, l'invocazione
 
-\begin{lstlisting}
+\begin{lstlisting}[style = SML]
 is_free "b" (Var "a")
 \end{lstlisting}
 
 deve avere risultato false, l'invocazione
 
-\begin{lstlisting}
+\begin{lstlisting}[style = SML]
 is_free "a" (Lambda ("a", Apply((Var "a"), Var "b")))
 \end{lstlisting}
 
 deve avere risultato false, l'invocazione
 
-\begin{lstlisting}
+\begin{lstlisting}[style = SML]
 is_free "b" (Lambda ("a", Apply((Var "a"), Var "b")))
 \end{lstlisting}
 
@@ -72,6 +72,12 @@ val rec is_free = fn s => fn Var v => s = v
 
 val is_free = fn: string -> lambda_expr -> bool
 \end{lstlisting}
+
+\subsection{Commento della soluzione}
+
+\omissis
+
+% ---------------------------------------------------------------------------- %
 
 \subsection{2\textsuperscript{o} Turno}
 
@@ -130,10 +136,14 @@ val rec cerca = fn s => fn [] => 0
 
 val rec eval = fn env =>
 			   fn costante    n           => n
-				| variabile   s           => cerca s env
+				+++| variabile   s           => cerca s env+++
 				| somma       (a1, a2)    => (eval env a1) +   (eval env a2)
 				| sottrazione (a1, a2)    => (eval env a1) -   (eval env a2)
 				| prodotto    (a1, a2)    => (eval env a1) *   (eval env a2)
 				| divisione   (a1, a2)    => (eval env a1) div (eval env a2)
-				| var         (v, e1, e2) => eval ((v, eval env e1)::env) e2;
+				+++| var         (v, e1, e2) => eval ((v, eval env e1)::env) e2;+++
 \end{lstlisting}
+
+\subsection{commento della soluzione}
+
+Gli operatori \sml{+}, \sml{-}, \sml{*}. \sml{div} si preoccupano di implementare la logica matematica del programma.

@@ -5,7 +5,7 @@
 Si consideri il seguente tipo di dato, che rappresenta una semplice espressione avente due argomenti x e y:
 
 \begin{lstlisting}[style = SML, caption = {Definizione del tipo di dato \sml{espressione Lambda}}]
-datatype Expr = X
+datatype +++Expr+++ = X
 			  | Y
 			  | Avg of Expr * Expr
 			  | Mul of Expr * Expr
@@ -28,12 +28,19 @@ Come suggerito dal nome, compute calcola il valore dell'espressione ricevuta com
 \subsection{Soluzione}
 
 \begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{compute}}]
-val rec compute = fn X		 	 => (fn x => fn y => x)
-				   | Y			 => (fn x => fn y => y)
-				   | Avg(e1, e2) => (fn x => fn y =>
-				   					((compute e1 x y) + (compute e2 x y)) div 2)
-				   | Mul(e1, e2) => (fn x => fn y =>
-				   					(compute e1 x y) * (compute e2 x y))
+val rec compute = fn +++X+++           => (‡fn x => fn y‡ => ŠxŠ)
+				   | +++Y+++           => (‡fn x => fn y‡ => ŠyŠ)
+				   | +++Avg(e1, e2)+++ => (‡fn x => fn y‡ => (Š(compute e1 x y) + (compute e2 x y)) div 2Š)
+				   | +++Mul(e1, e2)+++ => (‡fn x => fn y‡ => (Šcompute e1 x y) * (compute e2 x y)Š)
 
-val compute = fn: Expr -> int -> int -> int
+val compute = fn: +++Expr+++ -> ‡int -> int‡ -> ŠintŠ
 \end{lstlisting}
+
+\subsection{Commento della soluzione}
+
+Ancora una volta il problema si risolve con una funzione ricorsiva, che sfrutta la definizione del tipo di dato \sml{Expr} per arrivare alla soluzione. %
+Nota come la definizione del tipo della funzione (\sml{Expr -> int -> int -> int}) risulti un ottimo suggerimento per la risoluzione del problema.
+
+La funzione individua 4 casi particolari: \sml{X}, \sml{Y}, \sml{Avg(e1, e2)} ed \sml{Mul(e1, e2)} tutti definiti in termini del dato \sml{Expr}. %
+In ognuno dei casi vengono restituite due funzioni, le quali raccolgono i dati che verranno rielaborati nell'ultimo passaggio; %
+l'unico nella quale viene implementata la logica di calcolo.

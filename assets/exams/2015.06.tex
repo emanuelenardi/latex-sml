@@ -17,7 +17,7 @@ val rec somma = fn zero         => (fn n => n)
 
 Scrivere una funzione Standard ML, chiamata \sml{prodotto}, che ha tipo \sml{naturale -> naturale -> naturale}, che calcola il prodotto di due numeri naturali. Si noti che la funzione prodotto può usare la funzione somma nella sua implementazione.
 
-\subsection{Soluzione}
+\subsection{Guida alla soluzione}
 
 Prendiamo confidenza con il tipo di dato definito:
 
@@ -38,9 +38,8 @@ val rec somma = fn zero			=> (fn n => n)
 val somma = fn: naturale -> naturale -> naturale
 \end{lstlisting}
 
-Commento sulle due implementazioni:
+\subsection{Commento sull'implementazione dell funzione \sml{somma}}
 
-\medskip
 Entrambe le definizioni di \sml{somma} sono corrette. Nella prima definizione il caso \emph{successivo a} restituisce una funzione che mappa una variabile \sml{n} nel successivo della somma di \sml{a} con \sml{n}, nella seconda definizione, invece, il caso \emph{successivo a} restituisce una funzione che mappa una variabile \sml{n} nella somma di \sml{a} con il successivo di \sml{n}.
 
 \medskip
@@ -49,14 +48,15 @@ Il funzionamento dell'esecuzione della funzione \sml{somma} fra due numeri natur
 \smallskip
 bisogna togliere un valore \sml{successivo} al primo addendo affinché risulti pari al caso base (cioè zero). Questo lo si fa \textbf{o} aggiungendo un valore \sml{successivo} alla somma del primo addendo con il secondo (1\textsuperscript{a} implementazione) \textbf{o} sommando il primo addendo con il successivo del secondo addendo (2\textsuperscript{a} implementazione).
 
-\begin{lstlisting}[style = SML, caption = {Esempio di esecuzione}]
+\begin{lstlisting}[style = SML, caption = {Esempio di esecuzione di \sml{somma}}]
 > somma (successivo zero) (successivo (successivo zero));
 val it = successivo (successivo (successivo zero)): naturale
 \end{lstlisting}
 
 La somma di 1 e 2, risulta 3.
 
-\medskip
+\subsection{Soluzione}
+
 N.B. sono state aggiunte delle parentesi per far sì che gli argomenti dati in pasto alla funzione \sml{somma} siano delle espressioni valutabili e non delle funzioni, quali sarebbero senza le parentesi.
 
 \begin{lstlisting}[style = SML, caption={Definizione della funzione \sml{prodotto} tramite gli Assiomi di Peano}]
@@ -65,6 +65,8 @@ val rec prodotto = fn zero			=> (fn b => zero)
 
 val prodotto = fn: naturale -> naturale -> naturale
 \end{lstlisting}
+
+\subsection{Esempio di esecuzione}
 
 Mostriamo un esempio di esecuzione della funzione \sml{prodotto}:
 
