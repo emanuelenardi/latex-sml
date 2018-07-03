@@ -1,0 +1,43 @@
+\section{Giugno 2018}
+
+\subsection{Testo}
+
+Si scriva una funzione \sml{conta} (avente tipo \sml{''a list -> int}) che riceve come argomento una lista di \sml{''a l}.
+La funzione \sml{conta} ritorna il numero di elementi della lista senza considerare i duplicati.
+
+\medskip
+Come esempio, l'invocazione
+
+\begin{lstlisting}
+conta ["uno", "uno", "uno", "uno"];
+\end{lstlisting}
+
+deve avere risultato 1;
+
+\begin{lstlisting}
+conta [1, 2, 2, 3];
+\end{lstlisting}
+
+deve avere risultato 3;
+
+\begin{lstlisting}
+conta [2, 1, 3, 2];
+\end{lstlisting}
+
+deve avere risultato 3.
+
+
+
+\subsubsection{Soluzione}
+
+\begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{conta}}]
+val rec conta = fn [] 	   => 0
+					| a::l => if (List.exists (fn n => n = a) l) then
+		 								(conta l)
+									else
+										1 + conta l;
+
+val conta = fn: ''a list -> int
+\end{lstlisting}
+
+\subsection{Commento della soluzione}
