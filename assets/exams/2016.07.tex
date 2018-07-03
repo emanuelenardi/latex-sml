@@ -16,7 +16,7 @@ che rappresenta un'espressione del Lambda-calcolo.
 
 \medskip
 Il costruttore \sml{Var} crea un'espressione costituita da un'unica funzione/variabile (il cui nome è un valore di tipo \sml{string});
-il costruttore Lambda crea una Lambda-espressione a partire da un'altra espressione, legandone una variabile (indicata da un valore di tipo string);
+il costruttore \sml{Lambda} crea una Lambda-espressione a partire da un'altra espressione, legandone una variabile (indicata da un valore di tipo string);
 il costruttore \sml{Apply} crea un'espressione data dall'applicazione di un'espressione ad un'altra.
 
 \medskip
@@ -64,9 +64,9 @@ datatype lambda_expr = Var of string
 
 \begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{is\_free}}]
 val rec is_free = fn s => fn Var v => if (s = v) then
-									      false
+									      true
 									  else
-									      true;
+									      false
 				| Lambda (v, e) => if (s = v) then
 									   false
 								   else
