@@ -27,15 +27,15 @@ deve avere risultato 2.
 \begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{hist}}]
 val rec hist = fn +++[]+++	   => (‡fn (c:real, d:real)‡ => 0)
 				| +++[e]+++	   => (‡fn (c:real, d:real)‡ =>
-											if (Še > (c-d) andalso e < (c+d)Š) then
-												1
+											if (e > (c-d) andalso e < (c+d)) then
+												Š1Š
 											else
-												0)
+												Š0Š)
 				| +++(e :: l)+++ => (‡fn (c:real, d:real)‡ =>
-											if (Še > (c-d) andalso e < (c+d)Š) then
-												1 + hist l (c, d)
+											if (e > (c-d) andalso e < (c+d)) then
+												Š1 + hist l (c, d)Š
 											else
-												0 + hist l (c, d));
+												Š0 + hist l (c, d)Š);
 
 val hist = fn: real list -> real * real -> int
 \end{lstlisting}
