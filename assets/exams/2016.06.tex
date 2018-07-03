@@ -28,14 +28,14 @@ deve avere risultato 2.
 val rec hist = fn +++[]+++	   => (‡fn (c:real, d:real)‡ => 0)
 				| +++[e]+++	   => (‡fn (c:real, d:real)‡ =>
 											if (e > (c-d) andalso e < (c+d)) then
-												Š1Š
+												(*@ \phantom{t} @*) Š1Š
 											else
-												Š0Š)
+												(*@ \phantom{t} @*) Š0Š)
 				| +++(e :: l)+++ => (‡fn (c:real, d:real)‡ =>
 											if (e > (c-d) andalso e < (c+d)) then
-												Š1 + hist l (c, d)Š
+												(*@ \phantom{t} @*) Š1 + hist l (c, d)Š
 											else
-												Š0 + hist l (c, d)Š);
+												(*@ \phantom{t} @*) Š0 + hist l (c, d)Š);
 
 val hist = fn: real list -> real * real -> int
 \end{lstlisting}
