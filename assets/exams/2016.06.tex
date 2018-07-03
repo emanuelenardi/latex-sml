@@ -27,15 +27,15 @@ deve avere risultato 2.
 \begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{hist}}]
 val rec hist = fn +++[]+++	   => (‡fn (c:real, d:real)‡ => 0)
 				| +++[e]+++	   => (‡fn (c:real, d:real)‡ =>
-											if (Še > (c-d) andalso e < (c+d)Š) then
-												1
+											if (e > (c-d) andalso e < (c+d)) then
+												Š1Š
 											else
-												0)
+												Š0Š)
 				| +++(e :: l)+++ => (‡fn (c:real, d:real)‡ =>
-											if (Še > (c-d) andalso e < (c+d)Š) then
-												1 + hist l (c, d)
+											if (e > (c-d) andalso e < (c+d)) then
+												Š1 + hist l (c, d)Š
 											else
-												0 + hist l (c, d));
+												Š0 + hist l (c, d)Š);
 
 val hist = fn: real list -> real * real -> int
 \end{lstlisting}
@@ -84,3 +84,4 @@ val noduplen = fn: ''a list -> int
 \subsection{Commento della soluzione}
 
 Vedi luglio e agosto '15.
+Da notare che la soluzione funziona soltanto su liste ordinate. Per una soluzione che funziona a prescindere dall'ordinamento, vedi giugno '18.

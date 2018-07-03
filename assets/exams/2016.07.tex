@@ -63,7 +63,10 @@ datatype lambda_expr = Var of string
 \end{lstlisting}
 
 \begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{is\_free}}]
-val rec is_free = fn s => fn Var v => s = v
+val rec is_free = fn s => fn Var v => if (s = v) then
+									      false
+									  else
+									      true;
 				| Lambda (v, e) => if (s = v) then
 									   false
 								   else
