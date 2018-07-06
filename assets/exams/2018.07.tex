@@ -1,0 +1,46 @@
+\section{Luglio 2018}
+\subsection{Testo}
+
+Si consideri il tipo di dato \sml{ITER = Iter of int * (int -> int);} i cui valori \sml{Iter(n, f)} rappresentano funzioni che implementano un ciclo for come il seguente:
+
+\begin{lstlisting}
+int ciclofor (int x) {
+	for (int i = 0; i < n; i++) {
+		x = f(x);
+	}
+}
+\end{lstlisting}
+
+Si scriva una funzione \sml{eval} (avente tipo \sml{ITER -> (int -> int)}) che riceve come argomento un valore di tipo \sml{ITER} e ritorna una funzione da interi ad interi che implementa il ciclo indicato qui sopra (applica \sml{n} volte la funzione \sml{f} all'argomento).
+
+\medskip
+Come esempio, se \sml{val f = fn x => x + 2}, allora \sml{eval (Iter(8, f))} ritornerà una funzione che dato un numero \sml{i = 0} ritorna \sml{i = 16}:
+
+\begin{lstlisting}[style = SML]
+> val f = fn x => x + 2;
+val f = fn: int -> int
+
+> eval (Iter(8, f));
+val it = fn: int -> int
+
+> val g = eval (Iter(8, f));
+val g = fn: int -> int
+
+> g 5;
+val it = 21: int
+\end{lstlisting}
+
+\subsubsection{Soluzione}
+
+\begin{lstlisting}[style = SML, caption = {definizione della funzione \sml{eval}}]
+datatype ITER = Iter of int * (int -> int);
+
+val rec eval = fn Iter (n, f) =>
+		fn x => if (n > 0) then
+					eval (Iter (n - 1, f)) (f x)
+				else
+					x;
+\end{lstlisting}
+
+\subsection{Commento della soluzione}
+Vedi luglio '17.
