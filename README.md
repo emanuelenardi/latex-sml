@@ -6,7 +6,7 @@ Exams commented:
 - 2015: June, July, August, September;
 - 2016: June, July, August;
 - 2017: January, February, June, July, September;
-- 2018: January, February, June.
+- 2018: January, February, June, July.
 
 ## Contribute
 
