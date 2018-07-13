@@ -1,6 +1,6 @@
 \section{Giugno 2016}
 
-\subsection{1\textsuperscript{o} Turno}
+\subsection{Turno 1}
 
 \subsubsection{Testo}
 
@@ -28,14 +28,14 @@ deve avere risultato 2.
 val rec hist = fn +++[]+++	   => (‡fn (c:real, d:real)‡ => 0)
 				| +++[e]+++	   => (‡fn (c:real, d:real)‡ =>
 											if (e > (c-d) andalso e < (c+d)) then
-												(*@ \phantom{t} @*) Š1Š
+							 				(*@ \phantom{t} @*) Š1Š
 											else
-												(*@ \phantom{t} @*) Š0Š)
+											(*@ \phantom{t} @*) Š0Š)
 				| +++(e :: l)+++ => (‡fn (c:real, d:real)‡ =>
 											if (e > (c-d) andalso e < (c+d)) then
-												(*@ \phantom{t} @*) Š1 + hist l (c, d)Š
+											(*@ \phantom{t} @*) Š1 + hist l (c, d)Š
 											else
-												(*@ \phantom{t} @*) Š0 + hist l (c, d)Š);
+											(*@ \phantom{t} @*) Š0 + hist l (c, d)Š);
 
 val hist = fn: real list -> real * real -> int
 \end{lstlisting}
@@ -46,7 +46,7 @@ Vedi luglio e agosto '15.
 
 % ---------------------------------------------------------------------------- %
 
-\subsection{2\textsuperscript{o} Turno}
+\subsection{Turno 2}
 
 \subsubsection{Testo}
 

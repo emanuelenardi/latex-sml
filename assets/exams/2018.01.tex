@@ -1,12 +1,74 @@
 \section{Gennaio 2018}
 
 \subsection*{Testo}
-\addcontentsline{toc}{subsection}{Testo mancante}
 
-Il testo dell'esame non è ancora stato rilasciato dal Prof.re. %
-{\color{burgundy} Nel caso l'avesse fatto ed io non avessi ancora aggiornato questo documento ti prego di contattarmi via e-mail \href{mailto:emanuele.nardi@studenti.unitn.it}{\ExternalLink} o direttamente su Telegram \href{https://t.me/emanuelenardi}{\ExternalLink}.}
+Si consideri il tipo di dato
+
+\begin{lstlisting}
+datatype lambda_expr = Var of string
+					 | Lambda of string * lambda_expr
+					 | Apply of lambda_expr * lambda_expr;
+\end{lstlisting}
+
+che rappresenta un'espressione del Lambda-calcolo.
+
+Il costruttore \sml{Var} crea un'espressione costituita da un'unica funzione / variabile (il cui nome e' un valore di tipo \sml{string});
+il costruttore \sml{Lambda} crea una Lambda-espressione a partire da un'altra espressione, legandone una variabile (indicata da un valore di tipo string);
+il costruttore \sml{Apply} crea un'espressione data dall'applicazione di un'espressione ad un'altra.
+
+Si scriva una funzione \sml{is_bound} (avente tipo \sml{string -> lambda_expr -> bool}) che riceve come argomenti una stringa (che rappresenta il nome di una variabile / funzione) ed una Lambda-espressione,
+ritornando \sml{true} se la variabile indicata è legata nell'espressione, \sml{false} altrimenti.
+
+\medskip
+Come esempio, l'invocazione
+
+\begin{lstlisting}
+is_bound "a" (Var "a")
+\end{lstlisting}
+
+deve avere risultato \sml{false}, l'invocazione
+
+\begin{lstlisting}
+is_bound "b" (Var "a")
+\end{lstlisting}
+
+deve avere risultato \sml{false}, l'invocazione
+
+\begin{lstlisting}
+is_bound "a" (Lambda ("a", Apply((Var "a"), Var "b")))
+\end{lstlisting}
+
+deve avere risultato \sml{true}, l'invocazione
+
+\begin{lstlisting}
+is_bound "b" (Lambda ("a", Apply((Var "a"), Var "b")))
+\end{lstlisting}
+
+deve avere risultato \sml{false} e così via.
+
+\medskip
+\textbf{IMPORTANTE}: notare il tipo della funzione! La funzione usa la tecnica del currying per gestire i due argomenti.
+
+La funzione \sml{is_bound} deve essere definita in un file .sml separato dalla definizione del tipo di dato \sml{lambda_expr}. Si consegni il file .sml contenente la definizione di \sml{is_bound}.
 
 \subsection*{Soluzione}
-\addcontentsline{toc}{subsection}{Soluzione mancante}
 
-% \subsection{Commento della soluzione}
+\begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{is_bound}}]
+val rec is_bound =
+	fn s => fn Var v => s = v
+			 | Lambda (v, e) => if (s = v) then
+									true
+								else
+									is_bound s e
+			 | Apply (e1, e2) => (is_bound s e1) orelse (is_bound s e2);
+
+val is_bound = fn : string -> lambda_expr -> bool
+\end{lstlisting}
+
+\subsection{Commento della soluzione}
+
+\omissis
+
+\begin{itemize}
+	\item \href{http://tpcg.io/IQJ8dn}{Esempio online \ExternalLink}
+\end{itemize}

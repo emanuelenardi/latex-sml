@@ -1,14 +1,37 @@
 # LaTeX-SML
 
-Collection of exams of the functional programming course held at UNITN.
+Collezione di esami del corso di programmazione funzionale tenuto all'UNITN.
 
-Exams commented:
-- 2015: June, July, August, September;
-- 2016: June, July, August;
-- 2017: January, February, June, July, September;
-- 2018: January, February, June.
+Esami raccolti e commentati:
 
-## Contribute
+- 2015: Giugno, Luglio, Agosto, Settembre;
+- 2016: Giugno, Luglio, Agosto;
+- 2017: Gennaio, Febbraio, Giugno, Luglio, Settembre;
+- 2018: Gennaio, Febbraio, Giugno, Luglio.
+
+## Donate
+
+Se hai trovato queste dispense utili nel tuo percorso di studi ti prego di prendere in considerazione di fare una donazione.
+
+Permetti di mantenere vivo questo progetto! Non verrà mostrato l'importo versato ma solo che avrai contribuito al progetto, qualsiasi contributo è molto apprezzato :-) Puoi contribuire anche in forma anonima.
+
+```
+paypal.me/pools/c/85MUW0ex8l
+```
+
+Grazie per il tuo supporto!
+
+## Anteprima
+
+Puoi vedere il [PDF](https://raw.githubusercontent.com/posquit0/Awesome-CV/master/examples/resume.pdf)
+
+- [] creare immagine di resume ![Inserisci immagine](https://raw.githubusercontent.com/posquit0/Awesome-CV/master/examples/resume.pdf)
+
+## Ringraziamenti
+
+Vorrei fare un ringraziamento particolare a [Matteo Franzil](https://github.com/mfranzil) e a [Matteo Contrini](https://github.com/matteocontrini) per aver contribuito a migliorare questa dispensa.
+
+## Contribuisci
 
 Fork this repository, make your changes and then issue a pull request. If you find bugs or have new ideas that you do not want to implement yourself, file a bug report.
 
@@ -18,4 +41,4 @@ Copyright (c) Emanuele Nardi.
 
 License: [MIT][1]
 
-[1]:https://choosealicense.com/licenses/mit/
+[1]: https://choosealicense.com/licenses/mit/
