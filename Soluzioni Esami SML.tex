@@ -1,0 +1,239 @@
+% ---------------------------------------------------------------------------- %
+% ---------------------------------------------------------------------------- %
+% ---------------------------------------------------------------------------- %
+
+\author{Emanuele Nardi}
+\title{Soluzioni Esami ML}
+
+\newcommand{\pdfTitle}{UNITN -- Soluzioni Esami SML}
+\newcommand{\tags}{SML}
+
+\newcommand{\subject}{Programmazione Funzionale}
+\newcommand{\authorName}{Emanuele Nardi}
+
+% ---------------------------------------------------------------------------- %
+% ---------------------------------------------------------------------------- %
+% ---------------------------------------------------------------------------- %
+
+\input{preamble}
+
+\usepackage{mdframed}
+
+\input{mystyle}
+
+\lstloadlanguages{
+	ML,
+}
+
+% ---------------------------------------------------------------------------- %
+
+\lstset{
+	inputencoding = utf8/latin1,
+	extendedchars = true,
+	upquote = true,
+	% basicstyle = \tiny\ttfamily,
+	basicstyle = \scriptsize\ttfamily,
+	% basicstyle = \footnotesize\ttfamily,
+	breaklines = true,
+	columns = fixed,
+	frame = H,
+	prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\rhookswarrow}},
+	postbreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\rcurvearrowse}\space},
+	tabsize = 4,
+	frame = none,
+	aboveskip = 3mm,
+	belowskip = 3mm
+}
+
+% ---------------------------------------------------------------------------- %
+
+\lstdefinelanguage{SML} {
+	language = ML,
+}
+
+% ---------------------------------------------------------------------------- %
+
+\lstdefinestyle{SML} {
+	language = SML,
+	commentstyle = \color{ashgrey},
+	keywordstyle = \color{black}\bfseries,
+	morekeywords = {
+		val, type, datatype,
+		fn, rec, fun,
+		let, local, in, end,
+	}
+}
+
+% ---------------------------------------------------------------------------- %
+% ---------------------------------------------------------------------------- %
+
+\begin{document}
+
+\begin{center}
+    \section*{Soluzioni Esami SML}
+\end{center}
+
+% ---------------------------------------------------------------------------- %
+
+\subsubsection*{Giugno 2015}
+
+\begin{mdframed}
+	\begin{mdframed}
+		\lstinputlisting[style = SML]{2015.06/nat.sml}
+		\lstinputlisting[style = SML]{2015.06/nat_somma.sml}
+	\end{mdframed}
+
+	\lstinputlisting[style = SML]{2015.06/nat_prodotto.sml}
+\end{mdframed}
+
+% ---------------------------------------------------------------------------- %
+
+\subsubsection*{Luglio 2015}
+
+\begin{mdframed}
+	\begin{mdframed}
+		\lstinputlisting[style = SML]{2015.07/exp_xy.sml}
+	\end{mdframed}
+
+	\lstinputlisting[style = SML]{2015.07/compute.sml}
+\end{mdframed}
+
+% ---------------------------------------------------------------------------- %
+
+\subsubsection*{Agosto 2015}
+
+\begin{mdframed}
+	\lstinputlisting[style = SML]{2015.08/elementi_pari.sml}
+\end{mdframed}
+
+% ---------------------------------------------------------------------------- %
+
+\subsubsection*{Settebre 2015}
+
+\begin{mdframed}
+	\begin{mdframed}
+		\lstinputlisting[style = SML]{2015.09/codice.sml}
+	\end{mdframed}
+
+	\lstinputlisting[style = SML]{2015.09/arriva.sml}
+\end{mdframed}
+
+\newpage
+% ---------------------------------------------------------------------------- %
+
+\subsubsection*{Giugno 2016}
+
+\begin{mdframed}
+	\lstinputlisting[style = SML]{2016.06/hist.sml}
+	\lstinputlisting[style = SML]{2016.06/noduplen.sml}
+\end{mdframed}
+
+% ---------------------------------------------------------------------------- %
+
+\subsubsection*{Luglio 2016}
+
+\begin{mdframed}
+	\begin{mdframed}
+		\lstinputlisting[style = SML]{2016.07/lambda.sml}
+	\end{mdframed}
+
+	\lstinputlisting[style = SML]{2016.07/is_free.sml}
+
+	\noindent\hfil\rule{\textwidth}{.4pt}\hfil
+
+	\lstinputlisting[style = SML]{2016.07/semplifica.sml}
+\end{mdframed}
+
+% ---------------------------------------------------------------------------- %
+
+\subsubsection*{Agosto 2016}
+
+\begin{mdframed}
+	\begin{mdframed}
+		\lstinputlisting[style = SML]{2016.08/insieme.sml}
+	\end{mdframed}
+
+	\lstinputlisting[style = SML]{2016.08/intersezione.sml}
+\end{mdframed}
+
+
+
+\newpage
+% ---------------------------------------------------------------------------- %
+
+\subsubsection*{Febbraio 2017}
+
+\begin{mdframed}
+	\lstinputlisting[style = SML]{2017.02/unione.sml}
+\end{mdframed}
+
+% ---------------------------------------------------------------------------- %
+
+\subsubsection*{Giugno 2017}
+
+\begin{mdframed}
+	\lstinputlisting[style = SML]{2017.06/sommali-1.sml}
+
+	\noindent\hfil\rule{\textwidth}{.4pt}\hfil
+
+	\lstinputlisting[style = SML]{2017.06/sommali-2.sml}
+\end{mdframed}
+
+% ---------------------------------------------------------------------------- %
+
+\subsubsection*{Luglio 2017}
+
+\begin{mdframed}
+	\lstinputlisting[style = SML]{2017.07/eval-1.sml}
+
+	\noindent\hfil\rule{\textwidth}{.4pt}\hfil
+
+	\lstinputlisting[style = SML]{2017.07/eval-2.sml}
+\end{mdframed}
+
+% ---------------------------------------------------------------------------- %
+
+\subsubsection*{Settembre 2017}
+
+\begin{mdframed}
+	\lstinputlisting[style = SML]{2017.09/lega.sml}
+\end{mdframed}
+
+
+\newpage
+% ---------------------------------------------------------------------------- %
+
+\subsubsection*{Gennaio 2018}
+
+\begin{mdframed}
+	\begin{mdframed}
+		\lstinputlisting[style = SML]{2018.01/lambda_expr.sml}
+	\end{mdframed}
+
+	\lstinputlisting[style = SML]{2018.01/is_bound.sml}
+\end{mdframed}
+
+% ---------------------------------------------------------------------------- %
+
+\subsubsection*{Giugno 2018}
+
+\begin{mdframed}
+	\lstinputlisting[style = SML]{2018.06/conta.sml}
+\end{mdframed}
+
+% ---------------------------------------------------------------------------- %
+
+\subsubsection*{Luglio 2018}
+
+\begin{mdframed}
+	\lstinputlisting[style = SML]{2018.07/eval.sml}
+\end{mdframed}
+
+% ---------------------------------------------------------------------------- %
+% ---------------------------------------------------------------------------- %
+
+\end{document}
+
+% ---------------------------------------------------------------------------- %
+% ---------------------------------------------------------------------------- %
+% ---------------------------------------------------------------------------- %

@@ -7,8 +7,7 @@
 \input{define_languages}
 \input{define_styles}
 
-% Non stampa il no. delle sezioni
-\setcounter{secnumdepth}{0}
+\input{./assets/settings/specific-settings}
 
 \begin{document}
 
@@ -22,7 +21,13 @@
 
 	\pagestyle{footer}
 
-	\input{./assets/settings/introduction}
+	\input{./assets/other/intro}
+	\newpage
+	\input{./assets/other/self-intro}
+	\newpage
+	\input{./assets/other/how-to}
+	\newpage
+	\input{./assets/other/toc}
 	\afterpage{\blankpage}
 	\clearpage
 
@@ -61,5 +66,8 @@
 	\input{./assets/exams/2018.07}
 
 % ---------------------------------------------------------------------------- %
+
+	\newpage
+	\input{./assets/other/outro}
 
 \end{document}

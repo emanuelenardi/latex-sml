@@ -4,7 +4,7 @@
 Si consideri il tipo di dato \sml{ITER = Iter of int * (int -> int);} i cui valori \sml{Iter(n, f)} rappresentano funzioni che implementano un ciclo for come il seguente:
 
 \begin{lstlisting}
-int ciclofor (int x) {
+int iterloop (int x) {
 	for (int i = 0; i < n; i++) {
 		x = f(x);
 	}
@@ -43,4 +43,5 @@ val rec eval = fn Iter (n, f) =>
 \end{lstlisting}
 
 \subsection{Commento della soluzione}
+
 Vedi luglio '17.
