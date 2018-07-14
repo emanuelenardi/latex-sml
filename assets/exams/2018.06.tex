@@ -30,10 +30,10 @@ deve avere risultato 3.
 
 \begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{conta}}]
 val rec conta = fn [] 	   => 0
-					| a::l => if (List.exists (fn n => n = a) l) then
-		 								(conta l)
-									else
-										1 + conta l;
+		         | a::l    => if (List.exists (fn n => n = a) l) then
+		 					      (conta l)
+							  else
+					              1 + conta l;
 
 val conta = fn: ''a list -> int
 \end{lstlisting}

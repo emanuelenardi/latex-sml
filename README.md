@@ -9,11 +9,15 @@ Esami raccolti e commentati:
 - 2017: Gennaio, Febbraio, Giugno, Luglio, Settembre;
 - 2018: Gennaio, Febbraio, Giugno, Luglio.
 
-## Donate
+## Dona
 
 Se hai trovato queste dispense utili nel tuo percorso di studi ti prego di prendere in considerazione di fare una donazione.
 
-Permetti di mantenere vivo questo progetto! Non verrà mostrato l'importo versato ma solo che avrai contribuito al progetto, qualsiasi contributo è molto apprezzato :-) Puoi contribuire anche in forma anonima.
+Permetti di mantenere vivo questo progetto!
+
+Non verrà mostrato l'importo versato ma solo che avrai contribuito al progetto, qualsiasi contributo è molto apprezzato :blush:
+
+Puoi contribuire anche in forma anonima.
 
 ```
 paypal.me/pools/c/85MUW0ex8l
@@ -33,12 +37,10 @@ Vorrei fare un ringraziamento particolare a [Matteo Franzil](https://github.com/
 
 ## Contribuisci
 
-Fork this repository, make your changes and then issue a pull request. If you find bugs or have new ideas that you do not want to implement yourself, file a bug report.
+Forka questa repo, effettua i tuoi cambiamenti e poi creare una pull request.
 
-## License
+## Licenza
 
-Copyright (c) Emanuele Nardi.
-
-License: [MIT][1]
+Questo lavoro è sotto licenza [MIT][1].
 
 [1]: https://choosealicense.com/licenses/mit/
