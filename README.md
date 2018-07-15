@@ -9,19 +9,15 @@ Esami raccolti e commentati:
 - 2017: Gennaio, Febbraio, Giugno, Luglio, Settembre;
 - 2018: Gennaio, Febbraio, Giugno, Luglio.
 
-## Dona
+## Donazioni
 
-Se hai trovato queste dispense utili nel tuo percorso di studi ti prego di prendere in considerazione di fare una donazione.
+Se hai trovato queste dispense utili prendi in considerazione una donazione.
 
 Permetti di mantenere vivo questo progetto!
 
-Non verrà mostrato l'importo versato ma solo che avrai contribuito al progetto, qualsiasi contributo è molto apprezzato :blush:
+Non verrà mostrato l'importo versato, potrai farlo anche in forma anonima :blush:
 
-Puoi contribuire anche in forma anonima.
-
-```
-paypal.me/pools/c/85MUW0ex8l
-```
+[Dispensa SML](https://paypal.me/pools/c/85MUW0ex8l)
 
 Grazie per il tuo supporto!
 
@@ -37,7 +33,7 @@ Vorrei fare un ringraziamento particolare a [Matteo Franzil](https://github.com/
 
 ## Contribuisci
 
-Forka questa repo, effettua i tuoi cambiamenti e poi creare una pull request.
+Forka questa repo, effettua i tuoi cambiamenti e poi crea una richiesta di pull.
 
 ## Licenza
 

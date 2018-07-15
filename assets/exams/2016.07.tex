@@ -139,12 +139,12 @@ val rec cerca = fn s => fn [] => 0
 
 val rec eval = fn env =>
 			   fn costante    n           => n
-			(*@ \phantom{t} @*) +++| variabile   s           => cerca s env+++
+			   	| +++variabile   s           => cerca s env+++
 				| somma       (a1, a2)    => (eval env a1) +   (eval env a2)
 				| sottrazione (a1, a2)    => (eval env a1) -   (eval env a2)
 				| prodotto    (a1, a2)    => (eval env a1) *   (eval env a2)
 				| divisione   (a1, a2)    => (eval env a1) div (eval env a2)
-			(*@ \phantom{t} @*) +++| var (v, e1, e2) => eval ((v, eval env e1)::env) e2;+++
+				| +++var (v, e1, e2) => eval ((v, eval env e1)::env) e2;+++
 \end{lstlisting}
 
 \subsection{commento della soluzione}
