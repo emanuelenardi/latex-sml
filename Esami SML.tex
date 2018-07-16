@@ -43,10 +43,11 @@
 
 	\newcommand*{\currentYear}{2018}
 
-	\foreach \y in {2015,2016,...,\currentYear}{%
-	    \foreach \e in {01,02,06,07,08,09}{%
-	        \IfFileExists{./assets/exams/\y.\e} {%
-	            \input{./assets/exams/\y.\e}%
+	\foreach \year in {2015,2016,...,\currentYear}{%
+	    \foreach \month in {01,02,06,07,08,09}{%
+
+	        \IfFileExists{./assets/exams/\year.\month} {%
+	            \input{./assets/exams/\year.\month}%
 				\newpage
 	        }{%
 				% il file non esiste, quindi non fare nulla
