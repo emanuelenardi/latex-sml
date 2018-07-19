@@ -1,5 +1,10 @@
+% ---------------------------------------------------------------------------- %
+% ---------------------------------------------------------------------------- %
+% ---------------------------------------------------------------------------- %
+
 \input{./assets/settings/set_pdf}
 \input{preamble}
+
 \input{mystyle}
 
 \input{set_listing}
@@ -8,6 +13,9 @@
 \input{define_styles}
 
 \input{./assets/settings/specific-settings}
+
+% ---------------------------------------------------------------------------- %
+% ---------------------------------------------------------------------------- %
 
 \begin{document}
 
@@ -19,7 +27,7 @@
 
 % ---------------------------------------------------------------------------- %
 
-	\pagestyle{footer}
+	% \pagestyle{footer}
 
 	\input{./assets/other/intro}
 	\newpage
@@ -33,41 +41,30 @@
 
 % ---------------------------------------------------------------------------- %
 
-	\input{./assets/exams/2015.06}
-	\newpage
-	\input{./assets/exams/2015.07}
-	\newpage
-	\input{./assets/exams/2015.08}
-	\newpage
-	\input{./assets/exams/2015.09}
-	\newpage
-	\input{./assets/exams/2016.06}
-	\newpage
-	\input{./assets/exams/2016.07}
-	\newpage
-	\input{./assets/exams/2016.08}
-	\newpage
-	\input{./assets/exams/2017.01}
-	\newpage
-	\input{./assets/exams/2017.02}
-	\newpage
-	\input{./assets/exams/2017.06}
-	\newpage
-	\input{./assets/exams/2017.07}
-	\newpage
-	\input{./assets/exams/2017.09}
-	\newpage
-	\input{./assets/exams/2018.01}
-	\newpage
-	\input{./assets/exams/2018.02}
-	\newpage
-	\input{./assets/exams/2018.06}
-	\newpage
-	\input{./assets/exams/2018.07}
+	\newcommand*{\currentYear}{2018}
+
+	\foreach \year in {2015,2016,...,\currentYear}{%
+	    \foreach \month in {01,02,06,07,08,09}{%
+
+	        \IfFileExists{./assets/exams/\year.\month} {%
+	            \input{./assets/exams/\year.\month}%
+				\newpage
+	        }{%
+				% il file non esiste, quindi non fare nulla
+	        }%
+	    }%
+	}%
 
 % ---------------------------------------------------------------------------- %
 
 	\newpage
 	\input{./assets/other/outro}
 
+% ---------------------------------------------------------------------------- %
+% ---------------------------------------------------------------------------- %
+
 \end{document}
+
+% ---------------------------------------------------------------------------- %
+% ---------------------------------------------------------------------------- %
+% ---------------------------------------------------------------------------- %
