@@ -147,6 +147,6 @@ val rec eval = fn env =>
 				| +++var (v, e1, e2) => eval ((v, eval env e1)::env) e2;+++
 \end{lstlisting}
 
-\subsection{commento della soluzione}
+\subsection{Commento della soluzione}
 
 Gli operatori \sml{+}, \sml{-}, \sml{*}. \sml{div} si preoccupano di implementare la logica matematica del programma.

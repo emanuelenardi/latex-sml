@@ -52,4 +52,10 @@ val intersezione = fn: insiemediinteri -> insiemediinteri -> insiemediinteri
 
 \subsection{Commento della soluzione}
 
-Si può arrivare alla soluzione per passi.
+Si può arrivare alla soluzione per passi analizzando
+
+\begin{lstlisting}[style = SML]
+((contiene i1 n) andalso (contiene i2 n))
+\end{lstlisting}
+
+L'operatore \sml{andalso} implementa l'operazione logica \emph{and}, mentre l'operatore \sml{orelse} implementa l'operazione logica \emph{or}.

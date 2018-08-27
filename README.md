@@ -4,10 +4,10 @@ Collezione di esami del corso di programmazione funzionale tenuto all'UNITN.
 
 Esami raccolti e commentati:
 
-- 2015: Giugno, Luglio, Agosto, Settembre;
-- 2016: Giugno, Luglio, Agosto;
-- 2017: Gennaio, Febbraio, Giugno, Luglio, Settembre;
-- 2018: Gennaio, Febbraio, Giugno, Luglio.
+- _2015_: Giugno, Luglio, Agosto, Settembre;
+- _2016_: Giugno, Luglio, Agosto;
+- _2017_: Gennaio, Febbraio, Giugno, Luglio, Settembre;
+- _2018_: Gennaio, Febbraio, Giugno, Luglio.
 
 ## Donazioni
 
@@ -21,11 +21,11 @@ Non verrà mostrato l'importo versato, potrai farlo anche in forma anonima :blus
 
 Grazie per il tuo supporto!
 
-## Anteprima
+## Anteprima riasunto
 
-Puoi vedere il [PDF](https://raw.githubusercontent.com/posquit0/Awesome-CV/master/examples/resume.pdf)
+Puoi vedere il [PDF](https://raw.githubusercontent.com/posquit0/Awesome-CV/master/examples/resume.pdf) di riassunto.
 
-- [] creare immagine di resume ![Inserisci immagine](https://raw.githubusercontent.com/posquit0/Awesome-CV/master/examples/resume.pdf)
+![](https://raw.githubusercontent.com/emanuelenardi/latex-sml/blob/master/Soluzioni%20Esami%20SML.pdf)
 
 ## Ringraziamenti
 
