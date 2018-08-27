@@ -1,5 +1,5 @@
 val rec is_bound =
-	fn s => fn Var v => s = v
+	fn s => fn Var v => false
 			 | Lambda (v, e) => if (s = v) then
 									true
 								else
