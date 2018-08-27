@@ -1,0 +1,41 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+
+\begin{document}
+
+\subsection*{Array bi-dimensionali memorizzati per righe}
+
+Se gli array sono memorizzati \emph{per righe} ed \texttt{a[A][B]} è un array multidimensionale di interi (si assuma che la dimensione di un intero sia D byte) con \texttt{a[0][0]} che ha indirizzo \texttt{<base>}, qual è l’indirizzo dell'elemento \texttt{a[X][Y]}?
+
+\begin{lstlisting}
+indirizzo = <base> + <dim colonne> * <dim righe>
+indirizzo = <base> + (D * B * Y) + (D * X);
+\end{lstlisting}
+
+\subsection*{Array tri-dimensionali memorizzati per righe}
+
+Se gli array sono memorizzati \emph{per righe} ed \texttt{a[A][B][c]} è un array multidimensionale di interi (si assuma che la dimensione di un intero sia D byte) con \texttt{a[0][0][0]} che ha indirizzo \texttt{<base>}, qual è l’indirizzo di \texttt{a[X][Y][Z]}?
+
+\begin{lstlisting}
+indirizzo = <base> + (D * B * C * Z) + (D * C * Y) + (D * X);
+\end{lstlisting}
+
+\subsection*{Array bi-dimensionali memorizzati per colonne}
+
+Se gli array sono memorizzati \emph{per colonne} ed \texttt{a[A][B]} è un array multidimensionale di interi (si assuma che la dimensione di un intero sia D byte) con \texttt{a[0][0]} che ha indirizzo \texttt{<base>}, qual è l’indirizzo di \texttt{a[X][Y]}?
+
+\begin{lstlisting}
+indirizzo = <base> + <dim colonne> * <dim righe>
+indirizzo = <base> + (D * A * Y) + (D * X)
+\end{lstlisting}
+
+\subsection*{Array tri-dimensionali memorizzati per colonne}
+
+Se gli array sono memorizzati \emph{per colonne} ed \texttt{a[A][B][c]} è un array multidimensionale di interi (si assuma che la dimensione di un intero sia D byte) con \texttt{a[0][0][0]} che ha indirizzo \texttt{<base>}, qual è l’indirizzo di \texttt{a[X][Y][Z]}?
+
+\begin{lstlisting}
+indirizzo = <base> + (D * A * B * Z) + (D * A * Y) + (D * X);
+\end{lstlisting}
+
+\end{document}

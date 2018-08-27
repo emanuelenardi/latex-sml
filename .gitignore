@@ -219,5 +219,5 @@ TSWLatexianTemp*
 # expex forward references with \gathertags
 *-tags.tex
 
-# building folder when custom option on atom package "latex"
+# building folder when custom option on atom package "latex" is activated
 /build
