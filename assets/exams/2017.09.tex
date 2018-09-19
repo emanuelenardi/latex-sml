@@ -3,14 +3,12 @@
 \subsection{Testo}
 
 Si consideri il tipo di dato
-
-\begin{lstlisting}
+\begin{lstlisting}[style = SML]
 datatype intonil = Nil | Int of int
 \end{lstlisting}
 
 ed una possibile implementazione semplificata di ambiente (che considera solo valori interi) basata su di esso:
-
-\begin{lstlisting}
+\begin{lstlisting}[style = SML]
 type ambiente = string -> intonil
 \end{lstlisting}
 
@@ -18,7 +16,6 @@ In questa implementazione, un ambiente è rappresentato da una funzione che mapp
 
 \medskip
 Usando questa convenzione, l'ambiente vuoto (in cui nessun nome è associato a valori) può essere definito come:
-
 \begin{lstlisting}
 val ambientevuoto = fn _:string => Nil;
 \end{lstlisting}
@@ -40,7 +37,7 @@ A titolo di esempio:
 
 \subsection{Soluzione}
 
-\begin{lstlisting}
+\begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{lega}}]
 val lega = fn e:ambiente =>
 	fn nome =>
 		fn valore =>

@@ -4,7 +4,7 @@
 
 Si consideri il tipo di dato
 
-\begin{lstlisting}
+\begin{lstlisting}[style = SML, caption = {Dichiarazione del tipo \sml{lambda\_expr}}]
 datatype lambda_expr = Var of string
 					 | Lambda of string * lambda_expr
 					 | Apply of lambda_expr * lambda_expr;
@@ -49,8 +49,6 @@ deve avere risultato \sml{false} e così via.
 \medskip
 \textbf{IMPORTANTE}: notare il tipo della funzione! La funzione usa la tecnica del currying per gestire i due argomenti.
 
-La funzione \sml{is_bound} deve essere definita in un file .sml separato dalla definizione del tipo di dato \sml{lambda_expr}. Si consegni il file .sml contenente la definizione di \sml{is_bound}.
-
 \subsection*{Soluzione}
 
 \begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{is_bound}}]
@@ -69,6 +67,6 @@ val is_bound = fn : string -> lambda_expr -> bool
 
 \omissis
 
-\begin{itemize}
-	\item \href{http://tpcg.io/IQJ8dn}{Esempio online \ExternalLink}
-\end{itemize}
+% \begin{itemize}
+% 	\item \href{http://tpcg.io/IQJ8dn}{Esempio online \ExternalLink}
+% \end{itemize}

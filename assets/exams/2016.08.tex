@@ -2,14 +2,12 @@
 
 \subsection{Testo}
 
-Si consideri una possibile implementazione degli insiemi di interi in standard ML, in cui un insieme di interi  rappresentato da una funzione da \sml{int} a \sml{bool}:
-
+Si consideri una possibile implementazione degli insiemi di interi in standard ML, in cui un insieme di interi rappresentato da una funzione da \sml{int} a \sml{bool}:
 \begin{lstlisting}[style = SML, caption = {Definizione del tipo di dato \sml{insiemidiinteri}}]
 type insiemediinteri = int -> bool;
 \end{lstlisting}
 
 La funzione applicata ad un numero intero ritorna true se il numero appartiene all'insieme, false altrimenti. L'insieme vuoto è quindi rappresentato da una funzione che ritorna sempre false:
-
 \begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{vuoto}}]
 val vuoto:insiemediinteri = fn n => false;
 
@@ -17,7 +15,6 @@ val vuoto = fn: insiemediinteri
 \end{lstlisting}
 
 ed un intero può essere aggiunto ad un insieme tramite la funzione aggiungi:
-
 \begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{aggiungi}}]
 val aggiungi = fn f:insiemediinteri => fn x:int =>
 	(fn n:int => if (n = x) then
@@ -30,7 +27,6 @@ val aggiungi = fn: insiemediinteri -> int -> insiemediinteri
 \end{lstlisting}
 
 \'E possibile verificare se un intero è contenuto in un insieme tramite la funzione contiene:
-
 \begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{contiene}}]
 val contiene = fn f:insiemediinteri => fn n:int => f n;
 \end{lstlisting}

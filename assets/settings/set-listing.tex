@@ -1,0 +1,36 @@
+\lstloadlanguages{
+	ML,
+}
+
+\lstset{
+	inputencoding = utf8/latin1,
+	extendedchars = true,
+	upquote = true,
+	% basicstyle = \tiny\ttfamily,
+	basicstyle = \scriptsize\ttfamily,
+	% basicstyle = \footnotesize\ttfamily,
+	breaklines = true,
+	columns = fixed,
+	frame = H,
+	prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\rhookswarrow}},
+	postbreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\rcurvearrowse}\space},
+	tabsize = 4,
+	frame = none,
+	aboveskip = 3mm,
+	belowskip = 3mm
+}
+
+\lstdefinelanguage{SML} {
+	language = ML,
+}
+
+\lstdefinestyle{SML} {
+	language = SML,
+	commentstyle = \color{ashgrey},
+	keywordstyle = \color{black}\bfseries,
+	morekeywords = {
+		val, type, datatype,
+		fn, rec, fun,
+		let, local, in, end,
+	}
+}

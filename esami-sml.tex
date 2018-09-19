@@ -2,15 +2,10 @@
 % ---------------------------------------------------------------------------- %
 % ---------------------------------------------------------------------------- %
 
-\input{./assets/settings/set_pdf}
-\input{preamble}
+\input{./assets/settings/set-pdf}
 
-\input{mystyle}
-
-\input{set_listing}
-
-\input{define_languages}
-\input{define_styles}
+\input{my-preamble}
+\input{my-style}
 
 \input{./assets/settings/specific-settings}
 
@@ -21,7 +16,7 @@
 
 % ---------------------------------------------------------------------------- %
 
-	\input{initial_page}
+	\input{initial-page}
 	\afterpage{\blankpage}
 	\clearpage
 
@@ -41,7 +36,7 @@
 
 % ---------------------------------------------------------------------------- %
 
-	\newcommand*{\currentYear}{2018}
+	\newcommand*{\currentYear}{2019}
 
 	\foreach \year in {2015,2016,...,\currentYear}{%
 	    \foreach \month in {01,02,06,07,08,09}{%

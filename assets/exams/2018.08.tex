@@ -1,14 +1,61 @@
 \section{Agosto 2018}
 
 \subsection*{Testo}
-\addcontentsline{toc}{subsection}{Testo mancante}
 
-Il testo dell'esame non è ancora stato rilasciato dal Prof.re Kuper (e molto probabilmente non accaadrà mai). %
-{\color{burgundy} Nel caso l'avesse fatto ed io non avessi ancora aggiornato questo documento ti prego di contattarmi via e-mail \href{mailto:emanuele.nardi@studenti.unitn.it}{\ExternalLink} o direttamente su Telegram \href{https://t.me/emanuelenardi}{\ExternalLink}.}
+Si scriva una funzione \sml{prod} che computi, dati come argomento due \sml{int} \(n\) ed \(m\), il prodotto di tutti gli interi compresi tra \(m\) e \(n\). %
+Qualora sia \(m \geqslant n\) la funzione ritona il valore di \(m\). %
+Si impieghi inoltre questa funzione per definire la funzione \sml{comb} che riceve come argomento due valori di tipo \sml{int} \(n\) e \(k\) e ritorna il nuero delle combinazioni di \(n\) elementi presi \(k\) a \(k\), che a sua volta è definita come:
+
+\begin{equation*}
+comb(n, k) = \frac{n!}{k! (n - k)!}
+\end{equation*}
+
+Ecco alcuni esempi di output della funzione al variare dei parametri \(n\) e \(k\):
+
+\begin{lstlisting}[style = SML, frame = none]
+> comb(2, 2);
+val it = 1: int
+
+> comb(3, 1);
+val it = 3: int
+
+> comb(4, 2);
+val it = 6: int
+
+> comb(12, 7);
+val it = 792: int
+
+> comb(0, 0);
+val it = 1: int
+\end{lstlisting}
 
 \subsection*{Soluzione}
-\addcontentsline{toc}{subsection}{Soluzione mancante}
 
-Soluzione non rilasciata.
+La soluzione è riportata di seguito è presente sul set di slide \texttt{en\_extra\_1} presenti su %
+\href{https://drive.google.com/drive/u/1/folders/1mRM8Vjdcvwe5yU9ZYCYf0p2Fylxr5qBL}{drive \ExternalLink}.
 
-% \subsection{Commento della soluzione}
+\lstinputlisting[
+	style = SML,
+	caption = {Definizione delle funzioni \sml{prod} e \sml{comb} con \sml{fun}}
+]{2018.08/comb.sml}
+
+\subsection{Commento della soluzione}
+
+Da notare che in questo appello, a differenza dei precedenti, non è stato specificato il tipo di dato della funzione.
+
+L'esercizio poteva essere risolto equivalentemente tramite la tecnica del \emph{currying} e dichiarando privatamente (usando \sml{local}) la funzione \sml{prod}.
+
+\begin{lstlisting}[float, style = SML, caption = {Definizione delle funzioni \sml{prod} e \sml{comb} con \sml{val rec}}]
+local
+	val rec prod = fn m => fn n =>
+		if (n <= m) then
+			m
+		else
+			n * (prod m n-1);
+in
+	val rec comb = fn n => fn k =>
+			(prod (n - k + 1) n) div (prod 1 k);
+end;
+
+val comb = fn : int -> int -> int
+\end{lstlisting}

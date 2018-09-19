@@ -3,13 +3,10 @@
 \subsection{Testo}
 
 Si consideri il seguente tipo di dato, che rappresenta una semplice espressione avente due argomenti x e y:
-
-\begin{lstlisting}[style = SML, caption = {Definizione del tipo di dato \sml{espressione Lambda}}]
-datatype +++Expr+++ = X
-			  | Y
-			  | Avg of Expr * Expr
-			  | Mul of Expr * Expr
-\end{lstlisting}
+\lstinputlisting[
+	style = SML,
+	caption = {Definizione del tipo di dato \sml{espressione Lambda}}
+]{2015.07/expr.sml}
 
 dove il costruttore \sml{X} rappresenta il valore del primo argomento \sml{x} dell'espressione, %
 il costruttore \sml{Y} rappresenta il valore del secondo argomento \sml{y}, %
@@ -27,6 +24,13 @@ Come suggerito dal nome, \sml{compute} calcola il valore dell'espressione ricevu
 
 \subsection{Soluzione}
 
+\lstinputlisting[
+	style = SML,
+	caption = {Definizione della funzione \sml{compute}}
+]{2015.07/compute.sml}
+
+\subsection{Commento della soluzione}
+
 \begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{compute}}]
 val rec compute = fn +++X+++           => (‡fn x => fn y‡ => ŠxŠ)
 				   | +++Y+++           => (‡fn x => fn y‡ => ŠyŠ)
@@ -35,8 +39,6 @@ val rec compute = fn +++X+++           => (‡fn x => fn y‡ => ŠxŠ)
 
 val compute = fn: +++Expr+++ -> ‡int -> int‡ -> ŠintŠ
 \end{lstlisting}
-
-\subsection{Commento della soluzione}
 
 Ancora una volta il problema si risolve con una funzione ricorsiva, che sfrutta la definizione del tipo di dato \sml{Expr} per arrivare alla soluzione. %
 Nota come la definizione del tipo della funzione (\sml{Expr -> int -> int -> int}) risulti un ottimo suggerimento per la risoluzione del problema.

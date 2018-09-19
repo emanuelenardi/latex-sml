@@ -6,14 +6,11 @@ Scrivere una funzione Standard ML, chiamata \sml{elementi\_pari}, che ha tipo \s
 
 \medskip
 Per esempio
-
-\begin{lstlisting}[style = SML]
+\begin{lstlisting}[style = SML, frame = none]
 elementi_pari [1,‡5‡,2,‡10‡]
 \end{lstlisting}
-
 ritorna
-
-\begin{lstlisting}[style = SML]
+\begin{lstlisting}[style = SML, frame = none]
 [‡5‡,‡10‡]
 \end{lstlisting}
 
@@ -25,15 +22,20 @@ Si noti che la funzione \sml{elementi\_pari} può usare i costruttori forniti da
 
 \subsection{Soluzione}
 
+\lstinputlisting[
+	style = SML,
+	caption = {Definizione della funzione \sml{elementi\_pari}}
+]{2015.08/elementi_pari.sml}
+
+\subsection{Commento della soluzione}
+
 \begin{lstlisting}[style = SML, caption={Definizione della funzione \sml{elementi\_pari}}]
 val rec elementi_pari = fn +++[]+++         => +++[]+++
-						| +++[v]+++         => +++[]+++
+						| +++[a]+++         => +++[]+++
 						| ‡a::(b‡::ŠlŠ) => ‡b‡::(Šelementi_pari lŠ)
 
 val elementi_pari = fn:'a list -> 'a list
 \end{lstlisting}
-
-\subsection{Commento della soluzione}
 
 Si può arrivare alla soluzione affrontando il problema in modo ricorsivo. %
 Risolvendo prima i casi base: nei quali bisogna gestire la {\greenHL restituzione di una lista vuota} (\sml{[]}) o contenga un solo elemento (\sml{[v]}) in entrambi i casi restituiamo una \(\alpha\)-lista vuota, in quanto non esistono elementi pari.

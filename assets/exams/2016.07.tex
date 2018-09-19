@@ -5,13 +5,11 @@
 \subsubsection{Testo}
 
 Si consideri il tipo di dato
-
 \begin{lstlisting}[style = SML, caption = {Definizione del tipo di dato \sml{espressione Lambda}}]
 datatype lambda_expr = Var of string
 					 | Lambda of string * lambda_expr
 					 | Apply of lambda_expr * lambda_expr;
 \end{lstlisting}
-
 che rappresenta un'espressione del Lambda-calcolo.
 
 \medskip
@@ -26,25 +24,18 @@ ritornando \sml{true} se \emph{la variabile indicata appare come libera nell'esp
 
 \medskip
 Come esempio, l'invocazione
-
 \begin{lstlisting}[style = SML]
 is_free "a" (Var "a")
 \end{lstlisting}
-
 deve avere risultato true, l'invocazione
-
 \begin{lstlisting}[style = SML]
 is_free "b" (Var "a")
 \end{lstlisting}
-
 deve avere risultato false, l'invocazione
-
 \begin{lstlisting}[style = SML]
 is_free "a" (Lambda ("a", Apply((Var "a"), Var "b")))
 \end{lstlisting}
-
 deve avere risultato false, l'invocazione
-
 \begin{lstlisting}[style = SML]
 is_free "b" (Lambda ("a", Apply((Var "a"), Var "b")))
 \end{lstlisting}
@@ -87,7 +78,6 @@ val is_free = fn: string -> lambda_expr -> bool
 \subsubsection{Testo}
 
 Basandosi sul tipo di dato \sml{espressione} e la funzione \sml{eval} definiti come segue:
-
 \begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{semplifica}}]
 local
 	val rec eval = fn costante		n        => n
@@ -107,7 +97,6 @@ end;
 \end{lstlisting}
 
 il tipo espressione può essere esteso come segue per supporare il concetto di variabile:
-
 \begin{lstlisting}[style = SML, caption = {Definizione del tipo di dato \sml{espressione}}]
 datatype espressione = costante    of int
 					 | variabile   of string
@@ -132,7 +121,6 @@ La funzione \sml{eval} deve quindi avere tipo \sml{(string * int) list -> espres
 
 Questa é una possibile soluzione. %
 Si noti che in questa soluzione la funzione \sml{cerca} viene definita come visibile a tutti, mentre sarebbe più opportuno renderla locale a \sml{eval} usando un costrutto \sml{let} o \sml{local}.
-
 \begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{eval}}]
 val rec cerca = fn s => fn [] => 0
 						 | (s1, v)::l => if s1 = s then v else cerca s l;

@@ -3,24 +3,23 @@
 \subsection{Testo}
 
 Come noto, un numero naturale è esprimibile in base agli assiomi di Peano usando il seguente tipo di dato:
-
-\begin{lstlisting}[style = SML, caption = {Definizione di numero naturale tramite gli Assiomi di Peano}]
-datatype naturale = zero | successivo of naturale;
-\end{lstlisting}
+\lstinputlisting[
+	style = SML,
+	caption = {Definizione di numero naturale tramite gli Assiomi di Peano}
+]{2015.06/nat.sml}
 
 Usando tale tipo di dato, la \sml{somma} fra numeri naturali è esprimibile come:
 
-\begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{somma} tramite gli Assiomi di Peano}]
-val rec somma = fn zero         => (fn n => n)
-				| successivo a	=> (fn n => successivo (somma a n));
-\end{lstlisting}
+\lstinputlisting[
+	style = SML,
+	caption = {Definizione della funzione \sml{somma} tramite gli Assiomi di Peano}
+]{2015.06/nat_somma.sml}
 
 Scrivere una funzione Standard ML, chiamata \sml{prodotto}, che ha tipo \sml{naturale -> naturale -> naturale}, che calcola il prodotto di due numeri naturali. Si noti che la funzione prodotto può usare la funzione somma nella sua implementazione.
 
 \subsection{Guida alla soluzione}
 
 Prendiamo confidenza con il tipo di dato definito:
-
 \begin{lstlisting}[style = SML, caption = {Dichiarazione di numeri naturali}]
 > zero;
 val it = zero: naturale
@@ -30,15 +29,12 @@ val it = successivo (successivo zero): naturale
 \end{lstlisting}
 
 La \sml{somma} fra numeri naturali è esprimibile in due modi, equivalenti fra loro, un modo è quello illustrato dal professore, l'altro è il seguente:
+\lstinputlisting[
+	style = SML,
+	caption = {Definizione \emph{alternativa} della funzione \sml{somma} tramite gli Assiomi di Peano}
+]{2015.06/nat_somma_alt.sml}
 
-\begin{lstlisting}[style = SML, caption = {Definizione \emph{alternativa} della funzione \sml{somma} tramite gli Assiomi di Peano}]
-val rec somma = fn zero			=> (fn n => n)
- 				 | successivo a => (fn n => (somma a (successivo(n))));
-
-val somma = fn: naturale -> naturale -> naturale
-\end{lstlisting}
-
-\subsection{Commento sull'implementazione dell funzione \sml{somma}}
+\subsection{Commento sull'implementazione della funzione \sml{somma}}
 
 Entrambe le definizioni di \sml{somma} sono corrette. Nella prima definizione il caso \emph{successivo a} restituisce una funzione che mappa una variabile \sml{n} nel successivo della somma di \sml{a} con \sml{n}, nella seconda definizione, invece, il caso \emph{successivo a} restituisce una funzione che mappa una variabile \sml{n} nella somma di \sml{a} con il successivo di \sml{n}.
 
@@ -46,8 +42,8 @@ Entrambe le definizioni di \sml{somma} sono corrette. Nella prima definizione il
 Il funzionamento dell'esecuzione della funzione \sml{somma} fra due numeri naturali -- definiti secondo gli Assiomi di Peano -- è la seguente:
 
 \smallskip
-bisogna togliere un valore \sml{successivo} al primo addendo affinché risulti pari al caso base (cioè zero). Questo lo si fa \textbf{o} aggiungendo un valore \sml{successivo} alla somma del primo addendo con il secondo (1\textsuperscript{a} implementazione) \textbf{o} sommando il primo addendo con il successivo del secondo addendo (2\textsuperscript{a} implementazione).
-
+bisogna togliere un valore \sml{successivo} al primo addendo affinché risulti pari al caso base (cioè zero). %
+Questo lo si fa \textbf{o} aggiungendo un valore \sml{successivo} alla somma del primo addendo con il secondo (1\textsuperscript{a} implementazione) \textbf{o} sommando il primo addendo con il successivo del secondo addendo (2\textsuperscript{a} implementazione).
 \begin{lstlisting}[style = SML, caption = {Esempio di esecuzione di \sml{somma}}]
 > somma (successivo zero) (successivo (successivo zero));
 val it = successivo (successivo (successivo zero)): naturale
@@ -58,26 +54,15 @@ La somma di 1 e 2, risulta 3.
 \subsection{Soluzione}
 
 N.B. sono state aggiunte delle parentesi per far sì che gli argomenti dati in pasto alla funzione \sml{somma} siano delle espressioni valutabili e non delle funzioni, quali sarebbero senza le parentesi.
-
-\begin{lstlisting}[style = SML, caption={Definizione della funzione \sml{prodotto} tramite gli Assiomi di Peano}]
-val rec prodotto = fn zero			=> (fn b => zero)
-					| successivo(a) => (fn b => (somma b (prodotto a b)));
-
-val prodotto = fn: naturale -> naturale -> naturale
-\end{lstlisting}
+\lstinputlisting[
+	style = SML,
+	caption = {Definizione della funzione \sml{prodotto} tramite gli Assiomi di Peano}
+]{2015.06/nat_prodotto.sml}
 
 \subsection{Esempio di esecuzione}
 
 Mostriamo un esempio di esecuzione della funzione \sml{prodotto}:
-
-\begin{lstlisting}[style = SML, caption={Esempio di esecuzione}]
-datatype naturale = zero | succ of naturale;
-
-val rec somma = fn zero		=> (fn n => n)
-				 | succ a	=> (fn n => succ (somma a n));
-
-val rec prodotto = fn zero	  => (fn b => zero)
-					| succ(a) => (fn b => (somma b (prodotto a b)));
-
-prodotto (succ (succ (succ zero))) (succ (succ (succ zero)));
-\end{lstlisting}
+\lstinputlisting[
+	style = SML,
+	caption = {Esempio di esecuzione}
+]{2015.06/exec.sml}

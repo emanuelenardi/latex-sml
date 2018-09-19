@@ -3,13 +3,11 @@
 \subsection{Testo}
 
 Si consideri il seguente tipo di dato:
-
-\begin{lstlisting}[style = SML, nolol = true, caption = {Definizione del tipo di dato \sml{codice}}]
-datatype codice = rosso of string
-				| giallo of string
-				| verde of string;
-\end{lstlisting}
-
+\lstinputlisting[
+	nolol = true,
+	style = SML,
+	caption = {Definizione del tipo di dato \sml{codice}}
+]{2015.09/codice.sml}
 che rappresenta un paziente in arrivo al pronto soccorso.
 
 \medskip
@@ -23,13 +21,10 @@ Si scriva una funzione \sml{arriva} (avente tipo \sml{codice list -> codice -> c
 
 \medskip
 Come esempio, l'invocazione
-
 \begin{lstlisting}
 arriva [rosso "topolino", rosso "cip", giallo "ciop", verde "paperino", verde "pluto"] (giallo "clarabella");}
 \end{lstlisting}
-
 deve avere risultato
-
 \begin{lstlisting}
 [rosso "topolino", rosso "cip", giallo "ciop", giallo "clarabella", verde "paperino", verde "pluto"]}
 \end{lstlisting}
@@ -39,29 +34,96 @@ deve avere risultato
 
 \subsection{Soluzione}
 
-\begin{lstlisting}[style = SML, nolol = true, caption = {Definizione del tipo di dato \sml{codice}}]
-datatype codice = rosso of string
-				| giallo of string
-				| verde of string;
-\end{lstlisting}
+\lstinputlisting[
+	style = SML,
+	caption = {Definizione della funzione \sml{arriva}}
+]{2015.09/arriva_alt.sml}
 
-\begin{lstlisting}[style = SML, caption = {Definizione della funzione \sml{arriva}}]
+\subsection{Commento della soluzione}
+
+\begin{lstlisting}[style = SML]
 val rec arriva = fn
-		    []			  		=> (fn x 			 => [x])
-		  | (+++verde  n+++)::l => (fn (†verde  nn†) => (+++verde n+++)::(arriva l (†verde nn†))
-									| x				 => x::((+++verde n+++)::l))
-		  | (‡giallo n‡)::l => (fn (†verde  nn†)	 => (‡giallo n‡)::(arriva l (†verde nn†))
-		  					    | (Šgiallo nnŠ)		 => (‡giallo n‡)::(arriva l (Šgiallo nnŠ))
-							    | x					 => x::((‡giallo n‡)::l))
-		  | (---rosso  n---)::l => (fn x => (---rosso n---)::(arriva l x));
+		    []			  		=> (fn x		  => [x])
+		  | (+++verde  n+++)::l =>
+		  						(fn (†verde  nn†) => (+++verde n+++)::(arriva l (†verde nn†))
+								  | x			  => x::((+++verde n+++)::l))
+		  | (‡giallo n‡)::l		=>
+		  						(fn (†verde  nn†) => (‡giallo n‡)::(arriva l (†verde nn†))
+		  						  | (Šgiallo nnŠ) => (‡giallo n‡)::(arriva l (Šgiallo nnŠ))
+								  | x			  => x::((‡giallo n‡)::l))
+		  | (---rosso  n---)::l =>
+		  						(fn x			  => (---rosso n---)::(arriva l x));
 
 val arriva = fn: codice list -> codice -> codice list
 \end{lstlisting}
 
-\subsection{Commento della soluzione}
+La funzione \sml{arriva} crea una nuova lista, sulla base della lista di partenza, posizionando gli elementi dati in input nella posizione approppriata. %
+Come? Inserendo tutti gli elementi della lista iniziale seguendo delle regole di inserimento da noi definite.
+
+La magia di questa funzione risiede nel meccanismo di \emph{pattern matching} che permette di associare nomi, \sml{n} e \sml{nn} nel nostro caso, agli elementi da inserire e già inseriti all'interno della nuova lista.
+
+\subsubsection{Implementare le priorità}
+
+La funzione \sml{arriva} costruire una nuova lista sulla base delle seguenti regole di inserimento.
+
+\medskip
+Nel caso in cui l'elemento da inserire sia verde \sml{(+++verde  n+++)::l} allora \sml{=>} \dots
+\begin{lstlisting}[style = SML, frame = none]
+(fn (†verde  nn†) => (+++verde n+++)::(arriva l (†verde nn†))
+  | x			  => x::((+++verde n+++)::l))
+\end{lstlisting}
+\dots dev'essere inserito come ultimo fra i verdi, \emph{altrimenti}, \emph{in assenza di altri elementi verdi} presenti all'interno della lista, lo si inserisce alla fine della lista %
+(\sml{l} in questo caso sarà una lista vuota).
+
+\sml{verde  nn} rappresenta l'elemento verde da inserire all'interno della nuova lista, mentre \sml{verde n} è un ipotetico elemente già presente all'interno della nuova lista.
+
+Nota che \emph{la funzione è racchiusa fra parentesi} in modo tale da essere un'espressione valutabile e non una funzione.
+
+\medskip
+Nel caso in cui l'elemento da inserire sia giallo \sml{(‡giallo n‡)::l} allora \sml{=>} \dots
+\begin{lstlisting}[style = SML, frame = none]
+(fn (†verde  nn†) => (‡giallo n‡)::(arriva l (†verde nn†))
+  | (Šgiallo nnŠ) => (‡giallo n‡)::(arriva l (Šgiallo nnŠ))
+  | x             => x::((‡giallo n‡)::l))
+\end{lstlisting}
+\dots \emph{in presenza di soli elementi verdi} (quindi \emph{in assenza di altri elementi gialli o rossi}) presenti all'interno della lista dovrà essere posizionato prima di qualsiasi elemento verde, %
+\emph{altrimenti}, \emph{in presenza di elementi gialli} (quindi \emph{in assenza di altri elementi rossi}) verrà posizionato dopo tutti gli altri elementi gialli, %
+\emph{altrimenti} \emph{in presenza elementi rossi} verrà posizionato dopo quest'ultimi.
+
+\sml{verde n} è un ipotetico elemente già presente all'interno della nuova lista, mentre \sml{verde  nn} rappresenta l'elemento verde da inserire all'interno della nuova lista.
+
+Nota che \emph{la funzione è racchiusa fra parentesi} in modo tale da essere un'espressione valutabile e non una funzione.
+
+\medskip
+Nel caso in cui l'elemento da inserire sia rosso \sml{(---rosso  n---)::l} allora \sml{=>} \dots
+\begin{lstlisting}[style = SML, frame = none]
+(fn x => (---rosso n---)::(arriva l x))
+\end{lstlisting}
+\dots allora qualsiasi siano gli elementi all'interno della lista verranno posizionati dopo l'elemento inserito.
+
+\subsubsection{Riassumendo}
+
+Un elemento verde dev'essere inserito:
 
 \begin{itemize}
-	\item \sml{(+++verde n+++)::(arriva l (†verde nn†))} implementa \sml{verde to verde)};
-	\item \sml{(‡giallo n‡)::(arriva l (†verde nn†))} implementa \sml{giallo to verde)};
-	\item \sml{(‡giallo n‡)::(arriva l (Šgiallo nnŠ))} implementa \sml{giallo to giallo)}.
+	\item dopo qualsiasi elemento verde già presente all'interno della lista;
+	\item dopo qualsiasi altro elemento (giallo o rosso).
 \end{itemize}
+
+Un elemento giallo dev'essere inserito:
+
+\begin{itemize}
+	\item \emph{prima} di qualsiasi elemento \emph{verde} già presente all'interno della lista;
+	\item \emph{dopo} qualsiasi elemento \emph{giallo} già presente all'interno della lista;
+	\item \emph{dopo} qualsiasi elemento \emph{rosso} già presente all'interno della lista;
+\end{itemize}
+
+Infine \sml{[] => (fn x => [x])} rappresenta quindi il caso base, quello in cui la lista \emph{passata come argomento} è vuota e dobbiamo semplicemente copiare l'elemento da inserire "\sml{x}" all'interno della nuova lista.
+
+\subsection{Esempio di esecuzione}
+
+\lstinputlisting[
+	nolol = true,
+	style = SML,
+	frame = none
+]{2015.09/exec.sml}

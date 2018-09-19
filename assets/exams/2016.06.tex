@@ -9,17 +9,13 @@ La funzione \sml{hist} ritorna \emph{il numero di elementi della lista compresi 
 
 \medskip
 Come esempio, l'invocazione
-
-\begin{lstlisting}
+\begin{lstlisting}[style = SML, frame = none]
 hist [0.1, 0.5, 1.0, 3.0, 2.5] (1.0, 0.5);
 \end{lstlisting}
-
 deve avere risultato 1;
-
-\begin{lstlisting}
+\begin{lstlisting}[style = SML, frame = none]
 hist [0.1, 0.5, 1.0, 3.0, 2.5] (1.0, 0.6);
 \end{lstlisting}
-
 deve avere risultato 2.
 
 \subsubsection{Soluzione}
@@ -45,7 +41,7 @@ val hist = fn: real list -> real * real -> int
 Vedi luglio e agosto '15.
 
 % ---------------------------------------------------------------------------- %
-
+\newpage
 \subsection{Turno 2}
 
 \subsubsection{Testo}

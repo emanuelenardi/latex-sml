@@ -21,11 +21,9 @@ Non verrà mostrato l'importo versato, potrai farlo anche in forma anonima :blus
 
 Grazie per il tuo supporto!
 
-## Anteprima riasunto
+## Downloads
 
-Puoi vedere il [PDF](https://raw.githubusercontent.com/posquit0/Awesome-CV/master/examples/resume.pdf) di riassunto.
-
-![](https://raw.githubusercontent.com/emanuelenardi/latex-sml/blob/master/Soluzioni%20Esami%20SML.pdf)
+Puoi scaricare il [PDF](https://raw.githubusercontent.com/emanuelenardi/latex-sml/blob/master/soluzioni-esami-sml.pdf) contenente *solo* le soluzioni degli appelli (prive di testo, spiegazioni ed esempi), oppure l'intera [dispensa](https://github.com/emanuelenardi/latex-sml/blob/master/esami-sml.pdf).
 
 ## Ringraziamenti
 
