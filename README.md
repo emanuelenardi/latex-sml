@@ -23,7 +23,7 @@ Grazie per il tuo supporto!
 
 ## Downloads
 
-Puoi scaricare il [PDF](https://raw.githubusercontent.com/emanuelenardi/latex-sml/blob/master/soluzioni-esami-sml.pdf) contenente *solo* le soluzioni degli appelli (prive di testo, spiegazioni ed esempi), oppure l'intera [dispensa](https://github.com/emanuelenardi/latex-sml/blob/master/esami-sml.pdf).
+Puoi scaricare il [PDF](https://github.com/emanuelenardi/latex-sml/raw/master/soluzioni-esami-sml.pdf) contenente *solo* le soluzioni degli appelli (prive di testo, spiegazioni ed esempi), oppure l'intera [dispensa](https://github.com/emanuelenardi/latex-sml/raw/master/esami-sml.pdf).
 
 ## Ringraziamenti
 
