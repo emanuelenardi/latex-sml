@@ -1,0 +1,64 @@
+\section{Gennaio 2018}
+
+\subsection*{Testo}
+
+Si consideri il tipo di dato
+
+\begin{listing}{!h}
+\smlfile{assets/codes/2018.01/lambda-expr.sml}
+\caption{Dichiarazione del tipo \texttt{lambda_expr}}
+\end{listing}
+
+che rappresenta un'espressione del Lambda-calcolo.
+
+Il costruttore \texttt{Var} crea un'espressione costituita da un'unica funzione / variabile (il cui nome e' un valore di tipo \texttt{string});
+il costruttore \texttt{Lambda} crea una Lambda-espressione a partire da un'altra espressione, legandone una variabile (indicata da un valore di tipo string);
+il costruttore \texttt{Apply} crea un'espressione data dall'applicazione di un'espressione ad un'altra.
+
+Si scriva una funzione \texttt{is_bound} (avente tipo \texttt{string -> lambda_expr -> bool}) che riceve come argomenti una stringa (che rappresenta il nome di una variabile / funzione) ed una Lambda-espressione,
+ritornando \texttt{true} se la variabile indicata è legata nell'espressione, \texttt{false} altrimenti.
+
+\medskip
+Come esempio, l'invocazione
+
+\begin{smlcode}
+is_bound "a" (Var "a")
+\end{smlcode}
+
+deve avere risultato \texttt{false}, l'invocazione
+
+\begin{smlcode}
+is_bound "b" (Var "a")
+\end{smlcode}
+
+deve avere risultato \texttt{false}, l'invocazione
+
+\begin{smlcode}
+is_bound "a" (Lambda ("a", Apply((Var "a"), Var "b")))
+\end{smlcode}
+
+deve avere risultato \texttt{true}, l'invocazione
+
+\begin{smlcode}
+is_bound "b" (Lambda ("a", Apply((Var "a"), Var "b")))
+\end{smlcode}
+
+deve avere risultato \texttt{false} e così via.
+
+\medskip
+\textbf{IMPORTANTE}: notare il tipo della funzione! La funzione usa la tecnica del currying per gestire i due argomenti.
+
+\subsection*{Soluzione}
+
+\begin{listing}{!h}
+\smlfile{assets/codes/2018.01/lambda-expr.sml}
+\caption{Definizione della funzione \texttt{is_bound}}
+\end{listing}
+
+\subsection{Commento della soluzione}
+
+TODO
+
+\subsection*{Esempio di esecuzione}
+
+TODO

@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYG{k+kr}{type} \PYG{k+kt}{insiemediinteri} \PYG{p}{=} \PYG{n}{int} \PYG{p}{\PYGZhy{}\PYGZgt{}} \PYG{n}{bool}\PYG{p}{;}
+
+\PYG{k+kr}{val} \PYG{n+nv}{vuoto}\PYG{p}{:}\PYG{n}{insiemediinteri} \PYG{p}{=} \PYG{k+kr}{fn} \PYG{n}{n} \PYG{p}{=\PYGZgt{}} \PYG{n}{false}\PYG{p}{;}
+
+\PYG{k+kr}{val} \PYG{n+nv}{aggiungi} \PYG{p}{=} \PYG{k+kr}{fn} \PYG{n}{f}\PYG{p}{:}\PYG{n}{insiemediinteri} \PYG{p}{=\PYGZgt{}} \PYG{k+kr}{fn} \PYG{n}{x}\PYG{p}{:}\PYG{n}{int} \PYG{p}{=\PYGZgt{}}
+	\PYG{p}{(}\PYG{k+kr}{fn} \PYG{n}{n}\PYG{p}{:}\PYG{n}{int} \PYG{p}{=\PYGZgt{}} \PYG{k+kr}{if} \PYG{p}{(}\PYG{n}{n} \PYG{p}{=} \PYG{n}{x}\PYG{p}{)}
+			\PYG{k+kr}{then}
+				\PYG{n}{true}
+			\PYG{k+kr}{else}
+				\PYG{n}{f} \PYG{n}{n}
+	\PYG{p}{):}\PYG{n}{insiemediinteri}\PYG{p}{;}
+
+\PYG{k+kr}{val} \PYG{n+nv}{contiene} \PYG{p}{=} \PYG{k+kr}{fn} \PYG{n}{f}\PYG{p}{:}\PYG{n}{insiemediinteri} \PYG{p}{=\PYGZgt{}} \PYG{k+kr}{fn} \PYG{n}{n}\PYG{p}{:}\PYG{n}{int} \PYG{p}{=\PYGZgt{}} \PYG{n}{f} \PYG{n}{n}\PYG{p}{;}
+\end{Verbatim}

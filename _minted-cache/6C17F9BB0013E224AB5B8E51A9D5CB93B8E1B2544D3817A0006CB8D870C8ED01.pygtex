@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYG{c+cm}{(*ritorna la lunghezza di una lista*)}
+\PYG{k+kr}{fun} \PYG{n+nf}{length}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)} \PYG{p}{=} \PYG{k+kr}{if} \PYG{n}{null}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)} \PYG{k+kr}{then}
+					\PYG{l+m+mi}{0}
+				\PYG{k+kr}{else}
+					\PYG{l+m+mi}{1} \PYG{n}{+} \PYG{n}{lenght}\PYG{p}{(}\PYG{n}{tl}\PYG{p}{(}\PYG{n}{x}\PYG{p}{));}
+\end{Verbatim}

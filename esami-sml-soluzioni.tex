@@ -1,0 +1,240 @@
+\documentclass[
+	% ,draft
+	,a4paper
+	,10pt
+	,titlepage
+]{article}
+
+\usepackage{geometry}
+% \usepackage{debug}
+
+% NOTE stampa in formato A4
+\newif\ifaquattro
+\aquattrotrue
+
+\ifaquattro
+	\geometry{
+		,a4paper
+		% ,landscape
+		,margin	= 1in
+		,top	= .75in
+		,bottom	= .75in
+		,heightrounded
+	}
+\else
+	\geometry{
+		,a3paper
+		,landscape
+		,margin	= 1in
+		% ,top	= .75in
+		% ,bottom	= .75in
+		,heightrounded
+	}
+\fi
+
+\pagestyle{empty}
+\usepackage{comment}
+\usepackage{multicol}
+\usepackage[newfloat, cachedir=_minted-cache]{minted}
+\usemintedstyle{manni}
+
+\newmintedfile[smlfile]{sml}{frame=none}
+
+\setminted{
+	,breaklines  = true
+	,frame       = lines
+	,fontsize    = \footnotesize
+	,fontseries  = bold
+	,texcomments
+	,mathescape
+}
+\setminted[sml]{
+	,linenos = false
+	,tabsize = 4
+}
+
+% \usepackage{mdframed}
+
+\title{Soluzioni Esami SML}
+\newcommand\Title{UNITN -- Soluzioni Esami SML}
+\newcommand\Author{Emanuele Nardi}
+\newcommand\Subject{Programmazione Funzionale}
+\newcommand\Keywords{Functional Programming, Exam, Solutions}
+
+\usepackage{set-pdf-props}
+
+% NOTE ciclo di compilazione
+% arara: pdflatex: { shell: yes, synctex: yes }
+% arara: latexmk:  { clean: partial }
+% arara: clean:    { extensions: [synctex.gz] }
+\begin{document}
+
+\begin{comment}
+\begin{center}
+	\section*{Soluzioni Esami SML}
+\end{center}
+\end{comment}
+
+\ifaquattro
+	\subsection*{Appelli del 2015}
+\else
+	\begin{multicols}{2}
+\fi
+
+\subsubsection*{Giugno 2015}
+
+% \begin{mdframed}
+	% \begin{mdframed}
+		\smlfile{assets/codes/2015.06/nat.sml}
+		\smlfile{assets/codes/2015.06/nat-somma.sml}
+	% \end{mdframed}
+
+	\smlfile{assets/codes/2015.06/nat-prodotto.sml}
+% \end{mdframed}
+
+\subsubsection*{Luglio 2015}
+
+% \begin{mdframed}
+	% \begin{mdframed}
+		\smlfile{assets/codes/2015.07/expr.sml}
+	% \end{mdframed}
+
+	\smlfile{assets/codes/2015.07/compute.sml}
+% \end{mdframed}
+
+\subsubsection*{Agosto 2015}
+
+% \begin{mdframed}
+	\smlfile{assets/codes/2015.08/elementi-pari.sml}
+% \end{mdframed}
+
+\subsubsection*{Settebre 2015}
+
+% \begin{mdframed}
+	% \begin{mdframed}
+		\smlfile{assets/codes/2015.09/codice.sml}
+	% \end{mdframed}
+
+	\smlfile{assets/codes/2015.09/arriva.sml}
+% \end{mdframed}
+
+\ifaquattro
+	\newpage
+	\subsection*{Appelli del 2016}
+\else
+	\columnbreak
+\fi
+
+\subsubsection*{Giugno 2016}
+
+% \begin{mdframed}
+	\smlfile{assets/codes/2016.06/hist.sml}
+	\smlfile{assets/codes/2016.06/noduplen.sml}
+% \end{mdframed}
+
+\subsubsection*{Luglio 2016}
+
+% \begin{mdframed}
+	% \begin{mdframed}
+		\smlfile{assets/codes/2016.07/lambda.sml}
+	% \end{mdframed}
+
+	\smlfile{assets/codes/2016.07/is-free.sml}
+
+	\smlfile{assets/codes/2016.07/semplifica.sml}
+% \end{mdframed}
+
+\subsubsection*{Agosto 2016}
+
+% \begin{mdframed}
+	% \begin{mdframed}
+		\smlfile{assets/codes/2016.08/insieme.sml}
+	% \end{mdframed}
+
+	\smlfile{assets/codes/2016.08/intersezione.sml}
+% \end{mdframed}
+
+\ifaquattro
+\else
+	\end{multicols}
+\fi
+
+\newpage
+
+\ifaquattro
+	\newpage
+	\subsection*{Appelli del 2017}
+\else
+	\begin{multicols}{2}
+\fi
+
+\subsubsection*{Febbraio 2017}
+
+% \begin{mdframed}
+	\smlfile{assets/codes/2017.02/unione.sml}
+% \end{mdframed}
+
+\subsubsection*{Giugno 2017}
+
+% \begin{mdframed}
+	\smlfile{assets/codes/2017.06/sommali-1.sml}
+
+	\smlfile{assets/codes/2017.06/sommali-2.sml}
+% \end{mdframed}
+
+\subsubsection*{Luglio 2017}
+
+% \begin{mdframed}
+	\smlfile{assets/codes/2017.07/eval-0.sml}
+
+
+	\smlfile{assets/codes/2017.07/eval-1.sml}
+% \end{mdframed}
+
+\subsubsection*{Settembre 2017}
+
+% \begin{mdframed}
+	\smlfile{assets/codes/2017.09/lega.sml}
+% \end{mdframed}
+
+\ifaquattro
+	\newpage
+	\subsection*{Appelli del 2018}
+\else
+	\columnbreak
+\fi
+
+\subsubsection*{Gennaio 2018}
+
+% \begin{mdframed}
+	% \begin{mdframed}
+		\smlfile{assets/codes/2018.01/lambda-expr.sml}
+	% \end{mdframed}
+
+	\smlfile{assets/codes/2018.01/is-bound.sml}
+% \end{mdframed}
+
+\subsubsection*{Giugno 2018}
+
+% \begin{mdframed}
+	\smlfile{assets/codes/2018.06/conta.sml}
+% \end{mdframed}
+
+\subsubsection*{Luglio 2018}
+
+% \begin{mdframed}
+	\smlfile{assets/codes/2018.07/eval.sml}
+% \end{mdframed}
+
+\subsubsection*{Agosto 2018}
+
+% \begin{mdframed}
+	\smlfile{assets/codes/2018.08/comb-fun.sml}
+% \end{mdframed}
+
+\ifaquattro
+\else
+	\end{multicols}
+\fi
+
+\end{document}

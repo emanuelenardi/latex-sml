@@ -1,0 +1,48 @@
+\section{Agosto 2015}
+
+\subsection{Testo d'esame}
+
+Scrivere una funzione Standard ML, chiamata \texttt{elementi_pari}, che ha tipo \texttt{'a list -> 'a list}. La funzione riceve come parametro una \(\alpha\)-lista e ritorna una \(\alpha\)-lista contenente gli elementi della lista di ingresso che hanno posizione \emph{pari} (il secondo elemento, il quarto elemento, ecc\dots).
+
+\medskip
+Per esempio
+
+\begin{smlcode}
+elementi_pari [1,5,2,10]
+\end{smlcode}
+
+ritorna
+
+\begin{smlcode}
+[5,10]
+\end{smlcode}
+
+\medskip
+Si noti che la funzione \texttt{elementi_pari} non deve cambiare l'ordine degli elementi della lista rispetto all'ordine della lista ricevuta come argomento (considerando l'esempio precedente, il valore ritornato deve essere \texttt{[5,10]}, non \texttt{[10,5]}).
+
+\medskip
+Si noti, inoltre, che la funzione \texttt{elementi_pari} può usare i costruttori forniti da Standard ML per le \(\alpha\)-liste, senza bisogno di definire alcun \texttt{datatype} o altro.
+
+\subsection{Soluzione}
+
+\begin{listing}[!h]
+\smlfile{assets/codes/2015.08/elementi-pari.sml}
+\caption[]{Definizione della funzione \texttt{elementi_pari}}
+\end{listing}
+
+\subsection{Commento della soluzione}
+
+Si può arrivare alla soluzione affrontando il problema con logica ricorsiva.
+
+Risolviamo prima i casi base: quando ci viene data una lista vuota (\texttt{[]}) o una lista che contiene un solo elemento (\texttt{[v]}), restituiamo una \(\alpha\)-lista vuota, in quanto non esistono elementi in posizione pari.
+
+Nel caso più interessante, ossia quello in cui sono presenti uno -- o più -- elementi in una posizione pari, la lista viene letta \emph{due elementi alla volta} (che abbiamo chiamato \texttt{a} e \texttt{b}) dei quali si tiene solo il secondo (quello in posizione pari), per poi effettuare una chiamata ricorsiva della funzione sulla coda della lista, la quale è composta dalla lista passata precedentemente alla funzione \emph{privata} dei primi due elementi (\texttt{a} e \texttt{b}).
+
+\subsection*{Esempio di esecuzione}
+
+Mostriamo un esempio di esecuzione della funzione \texttt{elementi_pari}:
+
+\begin{listing}[!h]
+\smlfile{assets/codes/2015.08/exec.sml}
+\caption[]{Esempio di esecuzione}
+\end{listing}

@@ -1,0 +1,265 @@
+\documentclass{article}
+
+\newcommand{\Title}{UNITN -- Introduzione a Standard ML}
+\newcommand{\docversion}{v1.0.0}
+
+\usepackage{settings/main.preamble}
+\newcommand\Omicron{\mathcal{O}}
+
+\title{Introduzione a Standard ML}
+\subtitle{\texttt{print "help\textbackslash{}n";}}
+
+% NOTE non stampa il no. delle sezioni
+\setcounter{secnumdepth}{0}
+
+% arara: pdflatex: { shell: yes, synctex: no }
+% arara: pdflatex: { shell: yes, synctex: yes }
+% arara: latexmk:  { clean: partial }
+% arara: clean:    { extensions: [lol, synctex.gz] }
+\begin{document}
+\maketitle
+
+\subsubsection*{Impostazione ambiente di lavoro}
+
+Il modo più semplice per imparare Standard ML è quella di interagire tramite un \href{https://it.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop}{Read–Eval–Print Loop (REPL)}.
+Per installarlo ed eseguirlo in ambiente Linux:
+
+\begin{minted}[frame = none]{bash}
+$ sudo apt install polyml rlwrap    # installazione
+$ alias poly='rlwrap poly'          # defizione di alias
+$ poly                              # esecuzione della REPL
+\end{minted}
+
+Altrimenti, se usi un sistema windows, ti consiglio di utilizzare una \href{https://www.virtualbox.org/}{macchina virtuale} per simulare lo stesso ambiente che ti si presenterà in sede d'esame.
+Se proprio non puoi utilizzare una macchina virtuale allora puoi scaricare l'ultimo binario precompilato di Poly ML da \href{https://github.com/polyml/polyml/releases}{\faicon{github} github}.
+Per eseguire il codice fornito è possibile caricare il programma nel dal terminale con il comando ``\texttt{use}'':
+\begin{minted}[frame = none]{bash}
+use "exec.sml"
+\end{minted}
+Per interrompere la compilazione il comando da eseguire è \texttt{ctrl + c}, mentre per uscire dalla sub-shell di poly il comando è \texttt{ctrl + z}.
+
+\subsubsection*{Fonti}
+
+Questi appunti si basano sulla playlist ``Functional Programming with Standard ML'' visualizzata ad oggi all'incirca un migliaio di volte, ho pensavo fosse utile averne una trascrizione come traccia e veloce riferimento.
+All'interno della playlist sono presenti video dei corsi online di linguaggi di programmazione della Reykjavik University e della Washington University, insegnati da Hrafn Loftsson e Dan Grossman nell'inverno e nella primavera del 2013 rispettivamente.
+
+Per quanto riguarda il corso di \href{https://en.ru.is/kennarar/hrafn/}{Hrafn Loftsson} non sono riuscito a trovare ulteriori materiali oltre ai video pubblicati sul canale \href{https://www.youtube.com/channel/UCVqVubGFAhdFKOh2QWvBH4Q}{RU Computer Science}.
+
+Mentre per quanto riguardo il corso di Dan Grossman è possibile fruire dei materiali direttamente dal \href{https://courses.cs.washington.edu/courses/cse341/13wi/}{suo sito} che, seppur presentando una grafica spartana, fornisce tutto il materiale necessario a seguire il corso nel dettaglio, sono persino presenti i sorgenti dei codici che vedrete nei suoi video.
+
+Dan Grossman ha fornito in parallelo il corso sulla piattaforma Coursera ma seppur i due corsi di sovrappongano non sono presentati nella stessa maniera (come precisato nel documento ``\href{https://courses.cs.washington.edu/courses/cse341/13wi/courseraRelation.pdf}{Relation to Coursera Course}'').
+
+Recensire tutto questo materiale comporterebbe un grosso investimento di tempo che sperabilmente io riuscirò ad evitarti.
+
+Se pensi che questi appunti ti siano stati utili ti chiedo gentilmente di fare una \href{https://paypal.me/pools/c/85MUW0ex8l}{piccola donazione}.
+
+\subsection{Introduzione}
+
+La fondazione teorica della programmazione funzionale di basa sul lambda calcolo \emph{lamda calculus}.
+SML (Standard ML) è un linguaggio di programmazione derivato dall'ML (Meta Language).
+L'ML originale era una serie di MetaLinguaggi ideati da Robin Milner (e dai suoi studenti) all'Università di Edimburgo per creare programmi che eseguissero la dimostrazione di teoremi.
+Questi metalinguaggi furono poi ``standardizzati'' per dare origine all'SML, di cui lo standard più recente risale al 1997.
+L'SML è un linguaggio funzionale, quindi avente la caratteristica di rendere facile ed efficiente la creazione e l'uso di funzioni specializzate (dalla voce ``\href{https://it.wikipedia.org/wiki/Standard_ML}{Standard ML}'' da Wikipedia in italiano).\\[10pt]
+La programmazione funzionale è un paradigma di programmazione in cui il flusso di esecuzione del programma assume la forma di una serie di valutazioni di funzioni matematiche. Il punto di forza principale di questo paradigma è la mancanza di effetti collaterali (side-effect) delle funzioni, il che comporta una più facile verifica della correttezza e della mancanza di bug del programma e la possibilità di una maggiore ottimizzazione dello stesso.
+La programmazione funzionale pone maggior accento sulla definizione di funzioni, rispetto ai paradigmi procedurali e imperativi, che invece prediligono la specifica di una sequenza di comandi da eseguire. In questi ultimi, i valori vengono calcolati cambiando lo stato del programma attraverso delle assegnazioni; un programma funzionale, invece, è immutabile: i valori non vengono trovati cambiando lo stato del programma, ma costruendo nuovi stati a partire dai precedenti (dalla voce ``\href{https://it.wikipedia.org/wiki/Programmazione_funzionale}{Programmazione funzionale}'' da Wikipedia in italiano).
+
+\subsubsection*{Lettura consigliata}
+
+Un libro di riferimento di questo corso è ``\href{http://www.cs.cmu.edu/~rwh/isml/book.pdf}{Programming in Standard ML}'' di cui consiglio la lettura a partire dalla seconda parte ``The Core Language'' a pagina 13 leggendo dal secondo all'undicesimo capitolo
+% il secondo (Types, Values, and Effects), il terzo (Declarations), il quarto (Functions), il quinto (Products and Records), il sesto (Case Analysis), il settimo (Recursive Functions), l'ottavo (Type Inference and Polymorphism), il nono (Programming with Lists), ed il decimo (Concrete Data Types), e l'undicesimo capitolo (Higher-Order Functions)
+saltando tutti i restanti in quanto non preparano al superamento della prova d'esame; leggendo quindi da pagina 13 a pagina 102.
+
+\section{Caratteristiche del linguaggio}
+
+SML è un linguaggio intepretato, usa la notazione infissa ed ha le dichiarazioni di tipo (\foreign{type declarations}), usa l'inferenza di tipo (\foreign{type inference}) (ad esempio se \texttt{x} ed \texttt{y} sono di tipo \texttt{int}, allora \texttt{x+y} è di tipo \texttt{int}).
+\begin{smlcode}
+2 + 3 * 4;
+val it = 14 : int
+\end{smlcode}
+L'interprete risponde che il valore immesso ``it'' è di tipo intero.
+\begin{smlcode}
+2.0 + 3.0 * 4.0;
+val it = 14.0 : int
+\end{smlcode}
+Mentre in questo caso interpreta correttamente i tipi come reali.
+
+\'{E} un linguaggio fortemente tipato (\foreign{strongly typed}) e questo permette di determinare il tipo di ogni nome ed espressione a tempo di compilazione.
+Al contrario di un linguaggio come il Python dove il tipo è inferito a tempo di compilazione dall'inteprete.
+
+Può gestire le eccezioni e ha la possibilità di creare moduli per creare dati astratti (ADT).
+
+\subsection{Liste}
+
+Le liste sono una sequenza di 0 o più elementi \emph{dello stesso tipo}, delimitate da parentesi quadre e con la virgola come separatore di elementi.
+
+\begin{smlcode}
+[1,2,3]
+val it = [1,2,3] : int list
+
+["John", "Mary"]
+val it = ["John", "Mary"] : string list
+
+[] (*empty list*)
+val it = [] :'a list (*a list of some type*)
+\end{smlcode}
+Non abbiamo specificato il tipo di elementi presenti all'interno della lista, ma il linguaggio inferisce autonomamente che tipo di lista sia dal tipo di elementi contenuti al suo interno.
+In particolare notiamo che nella dichiarazione della lista vuota SML non sa determinare il tipo della lista.
+
+Un lista può essere sia una lista vuota, dichiarata con \smlinline{[]}, oppure nella forma \smlinline{a::y}, dove \smlinline{a} è la testa e \smlinline{y} è la coda.
+Ad esempio \smlinline{[7]} è uguale a \smlinline{7::[]}.
+Questa sintassi può essere utilizzata per creare liste ed estrarre i suoi elementi.
+
+\begin{smlcode}
+7::[];
+val it = [7]: int list
+\end{smlcode}
+In questo caso la testa è 7, mentre la coda è la lista vuota.
+
+\subsubsection{Operazioni sulle liste}
+
+In quanto le liste sono gli elementi di base del linguaggio, dobbiamo aver la possibilità di manipolarle tramite operazioni sulle liste:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{@{} >{\ttfamily}l l @{}}
+	null(x)	& ritorna true se la lista è vuota \\
+	hd(x)	& ritorna la testa di x \\
+	tl(x)	& ritorna la coda di x \\
+	a::x	& costruisce una lista con testa \texttt{a} e coda \texttt{x} \\
+	\end{tabular}
+	\caption[Operazioni sulle liste]{}
+	\label{tab:list-op}
+\end{table}
+
+\begin{smlcode}
+hd([1,2,3]);
+val it = [1] : int list
+
+tl([1,2,3]);
+val it = [2,3] : int list
+\end{smlcode}
+
+Nota che la testa di una lista è sempre un elemento (che potrebbe essere una lista), mentre la coda è una lista di elementi (che in questo caso è una lista che contiene gli elementi 2 e 3).
+Possiamo quindi sfruttare questo meccanismo per inserire elementi nella testa della lista e costruirne una nuova.
+\begin{smlcode}
+1::[2,3];
+val it = [1,2,3] : int list
+\end{smlcode}
+Il numero 1 costituisce la testa della lista, mentre la coda è una lista di 2 elementi.
+
+\subsection{Funzioni}
+
+Le funzioni in ML si definiscono con la seguente sintassi
+\begin{verbatim}
+fun <name> <formal-parameters> = <body>
+\end{verbatim}
+Ad esempio
+\begin{smlcode}
+fun succ n = n + 1;
+val succ = fn : int -> int
+\end{smlcode}
+
+L'interprete mi sta dicendo che ``succ'' è una funzione che mappa un integer in un integer.
+La prima ``n'' costituisce il paramentro formale, mentre ``n+1'' il paramentro attuale.
+
+Ancora una volta che non ho specificato il tipo del parametro della funzione ma riesce correttamente ad inferire il tipo.
+\begin{quote}
+Come riesce ML ad inferire che la funzione tratta dei numeri interi?
+\end{quote}
+Nota che applico ad una variabile una funzione di somma con un intero, in quanto il risultato della somma sarà un valore intero, allora la funzione tornerà anchessa un intero.
+
+Le funzioni si possono richiamare sia scrivendo f(x) sia scrivendo f x.
+Quindi se voglio richiamare la funzione appena dichiarata posso sia scrivendo ``\smlinline{succ(3);}'' che ``\smlinline{succ 3;}''.
+
+Le funzioni sono associative a sinistra, quindi l'espressione \smlinline{f g x} è equivalente alla scrittura \smlinline{(f g) x}.
+
+\subsection{Funzioni lineari implementate sulle liste}
+
+La maggior parte delle funzioni su liste operano su ogni elemento in una lista, ad esempio:
+\begin{smlcode}
+(*ritorna la lunghezza di una lista*)
+fun length(x) = if null(x) then
+					0
+				else
+					1 + lenght(tl(x));
+\end{smlcode}
+Questa funzione è linearmente ricorsiva poiché si richiama solamente una volta sul lato destro.
+
+\subsection{Operazioni comuni sulle liste}
+
+La funzione \texttt{append(x,y)} ritorna una nuova lista con gli elemnti di \texttt{x} seguiti dagli elementi di \texttt{z}.
+Può essere definita nel seguente modo
+\begin{smlcode}
+fun append(x,z) = if null(x) then
+					  z
+				  else
+				  	  hd(x)::append(tl(x),z);
+\end{smlcode}
+\paragraph{Spiegazione}
+L'algoritmo funziona esaurisce la lunghezza della lista \texttt{x} e ne costruisce una nuova tramite l'operatore \texttt{::} (quello che in Lisp viene chiamato \texttt{cons}).
+La prima condizione consiste nel caso base della ricorsione, mentre la seconda condizione è chiamata passo ricorsivo.
+Il suo funzionamento sarà fatto vedere in dettaglio più avanti. Siamo un esempio di esecuzione
+\begin{smlcode}
+append([1],[2]);
+val it = [1, 2]: int list
+\end{smlcode}
+La funzione \texttt{append} è definita all'interno del linguaggio come un operatore di concatenazione fra liste, indicato dal simbolo ``\texttt{@}''.
+Ad esempio
+\begin{smlcode}
+[1,2]@[3,4,5];
+val it = [1,2,3,4,5] : int list
+\end{smlcode}
+
+\subsubsection{Funzionamento della funzione append}
+
+\begin{smlcode}
+        append([1,2],[3,4,5])
+=    1::append([2],[3,4,5])
+= 1::2::append([],[3,4,5])
+\end{smlcode}
+Qui si applica il caso base (in quanto la lista \texttt{x} è nulla), quindi di ritorna il parametro z
+\begin{smlcode}
+  1::2::[3,4,5]
+= 1::[2,3,4,5]
+= [1,2,3,4,5]
+\end{smlcode}
+\paragraph{Studio della complessità}
+Il costo dell'algoritmo dipende solamente dalla lunghezza del primo elemento, in questo caso una lista, di conseguenza ha complessità \(\Omicron(n)\).
+
+La funzione \texttt{reverse(x,z)} ritorna una lista avente come testa la prima lista inversa e come coda la seconda lista.
+Ad esempio \smlinline{reverse ([2,3,4],[1])} \(\equiv\) \smlinline{[4,3,2,1]}.
+
+La funzione \texttt{reverse} è definita all'interno del linguaggio come la funzione \texttt{rev}.
+E possiamo dire che \smlinline{rev(x)} \(\equiv\) \smlinline{reverse (x,[])}.
+La funzione \texttt{rev} è una funzione \foreign{wrapper} per \texttt{reverse (x,[])} contenente i due parametri x, la lista che gli abbiamo passato, e [], una lista di appoggio che diventerà la nostra nuova lista.
+\begin{smlcode}
+rev([1,2,3,4]); (* rev [1,2,3,4]; *)
+val it = [4, 3, 2, 1]: int list
+\end{smlcode}
+
+Se proviamo a identificare il caso base, è ovvio che \smlinline{reverse([],z)} e \smlinline{z} sono equivalenti, così come \smlinline{reverse(a::y,z)} e \smlinline{reverse (y,a::z)}.
+La funzione \texttt{reverse} è così definita:
+\begin{smlcode}
+fun reverse(x,z) = if null(x) then
+				       z
+				   else
+				       reverse(tl(x),hd(x)::z);
+\end{smlcode}
+A meno di definirla noi, non è possibile richiamre la funzione \texttt{reverse(x)}, l'interprete restituirà un errore nel caso provassimo ad invocarla.
+
+\subsubsection{Funzionamento della funzione reverse}
+
+\begin{smlcode}
+  reverse([2,3,4],[1])
+= reverse([3,4],2::[1])
+= reverse([3,4],[2,1])
+= reverse([4],3::[2,1])
+= reverse([4],[3,2,1])
+= reverse([], 4::[3,2,1])
+= reverse([], [4,3,2,1]) (* caso base *)
+= [4,3,2,1]
+\end{smlcode}
+\paragraph{Complessità}
+La funzione \texttt{reverse} è \(\Omicron(n)\) dove \(n\) è la lunghezza di \texttt{x}, ossia della lista in testa.
+
+\end{document}

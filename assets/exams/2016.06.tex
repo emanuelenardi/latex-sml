@@ -1,0 +1,74 @@
+\section{Giugno 2016}
+
+\subsection{Turno 1}
+
+\subsubsection{Testo}
+
+Si scriva una funzione \texttt{hist} (avente tipo \texttt{real list -> real * real -> int}) che riceve come argomento \emph{una lista} di \texttt{real l} ed \emph{una coppia} di \texttt{real (c, d)}.
+La funzione \texttt{hist} ritorna \emph{il numero di elementi della lista compresi nell'intervallo \texttt{(c - d, c + d)}}, estremi esclusi (vale a dire il numero di elementi \texttt{r} tali che \texttt{(c - d < r < c + d)}.
+
+\medskip
+Come esempio, l'invocazione
+
+\begin{smlcode}
+hist [0.1, 0.5, 1.0, 3.0, 2.5] (1.0, 0.5);
+\end{smlcode}
+
+deve avere risultato 1;
+
+\begin{smlcode}
+hist [0.1, 0.5, 1.0, 3.0, 2.5] (1.0, 0.6);
+\end{smlcode}
+
+deve avere risultato 2.
+
+\subsubsection{Soluzione}
+
+\begin{listing}{!h}
+\smlfile{assets/codes/2016.06/hist.sml}
+\caption[]{Definizione della funzione \texttt{hist}}
+\end{listing}
+
+\subsection{Commento della soluzione}
+
+Vedi luglio e agosto '15.
+
+\subsection{Turno 2}
+
+\subsubsection{Testo}
+
+Si scriva una funzione \texttt{noduplen} (avente tipo \texttt{''a list -> int}) che riceve come argomento una lista di \texttt{''a l}.
+La funzione \texttt{noduplen} ritorna il numero di elementi della lista senza considerare i duplicati.
+
+\medskip
+Come esempio, l'invocazione
+
+\begin{smlcode}
+noduplen ["pera", "pera", "pera", "pera"];
+\end{smlcode}
+
+deve avere risultato 1;
+
+\begin{smlcode}
+noduplen ["red", "red", "green", "blue"];
+\end{smlcode}
+
+deve avere risultato 3.
+
+\subsubsection{Soluzione}
+
+\begin{listing}{!h}
+\smlfile{assets/codes/2016.06/noduplen.sml}
+\caption[]{Definizione della funzione \texttt{noduplen}}
+\end{listing}
+
+\subsection{Commento della soluzione}
+
+Vedi luglio e agosto '15.
+
+Da notare che la soluzione funziona soltanto su liste ordinate.
+Per una soluzione che funziona a prescindere dall'ordinamento, vedi giugno '18.
+
+\subsection*{Esempio di esecuzione}
+
+TODO

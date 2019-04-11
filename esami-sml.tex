@@ -1,0 +1,61 @@
+\documentclass[a4paper, 10pt]{article}
+
+\newcommand{\Title}{UNITN -- Esami SML}
+\newcommand{\docversion}{v1.0.0}
+
+\usepackage{settings/main.preamble}
+
+\title{Esami \emph{commentati} di\\Programmazione Funzionale}
+\subtitle{\texttt{print "Hello World{\textbackslash}n";}}
+
+% arara: pdflatex: { shell: yes, synctex: no }
+% arara: pdflatex: { shell: yes, synctex: yes }
+% arara: latexmk:  { clean: partial }
+% arara: clean:    { extensions: [lol, synctex.gz] }
+\begin{document}
+\maketitle
+\vfill
+\includegraphics[width=.8\textwidth]{assets/figures/absurd-07}
+\thispagestyle{empty}
+
+\afterpage{\blankpage}
+\clearpage
+
+\pagestyle{pageReference}
+
+\input{assets/intro/introduction}
+\input{assets/intro/self-introduction}
+
+\afterpage{\blankpage}
+\clearpage
+
+\input{assets/intro/table-of-contents}
+\input{assets/intro/how-to-read}
+\input{assets/intro/changelog}
+\clearpage
+
+\part{Esami Pratici}
+\input{assets/exams/2015.06}
+\input{assets/exams/2015.07}
+
+\begin{comment}
+\newcommand*{\currentYear}{2019}
+
+\foreach \year in {2015,2016,...,\currentYear}{%
+	\foreach \month in {01,02,06,07,08,09}{%
+
+		\IfFileExists{assets/exams/\year.\month} {%
+			\input{assets/exams/\year.\month}%
+			\newpage
+		}{%
+			% il file non esiste, quindi non fare nulla
+		}%
+	}%
+}%
+\end{comment}
+\afterpage{\blankpage}
+\clearpage
+
+\input{assets/outro/outro}
+
+\end{document}

@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYG{c+cm}{(* use "expr"; *)}
+\PYG{k+kr}{datatype} \PYG{k+kt}{Expr} \PYG{p}{=} \PYG{n+nc}{X} \PYG{p}{|} \PYG{n+nc}{Y} \PYG{p}{|} \PYG{n+nc}{Avg} \PYG{k+kr}{of} \PYG{n}{Expr} \PYG{n}{*} \PYG{n}{Expr} \PYG{p}{|} \PYG{n+nc}{Mul} \PYG{k+kr}{of} \PYG{n}{Expr} \PYG{n}{*} \PYG{n}{Expr}\PYG{p}{;}
+
+\PYG{c+cm}{(* use "compute"; *)}
+\PYG{k+kr}{val} \PYG{n+nv}{rec} \PYG{n}{compute} \PYG{p}{=} \PYG{k+kr}{fn} \PYG{n}{X}            \PYG{p}{=\PYGZgt{}} \PYG{p}{(}\PYG{k+kr}{fn} \PYG{n}{x} \PYG{p}{=\PYGZgt{}} \PYG{k+kr}{fn} \PYG{n}{y} \PYG{p}{=\PYGZgt{}} \PYG{n}{x}\PYG{p}{)}
+				   \PYG{n}{|} \PYG{n}{Y}            \PYG{p}{=\PYGZgt{}} \PYG{p}{(}\PYG{k+kr}{fn} \PYG{n}{x} \PYG{p}{=\PYGZgt{}} \PYG{k+kr}{fn} \PYG{n}{y} \PYG{p}{=\PYGZgt{}} \PYG{n}{y}\PYG{p}{)}
+				   \PYG{n}{|} \PYG{n}{Avg}\PYG{p}{(}\PYG{n}{e1}\PYG{p}{,} \PYG{n}{e2}\PYG{p}{)}  \PYG{p}{=\PYGZgt{}} \PYG{p}{(}\PYG{k+kr}{fn} \PYG{n}{x} \PYG{p}{=\PYGZgt{}} \PYG{k+kr}{fn} \PYG{n}{y} \PYG{p}{=\PYGZgt{}} \PYG{p}{((}\PYG{n}{compute} \PYG{n}{e1} \PYG{n}{x} \PYG{n}{y}\PYG{p}{)} \PYG{n}{+} \PYG{p}{(}\PYG{n}{compute} \PYG{n}{e2} \PYG{n}{x} \PYG{n}{y}\PYG{p}{))} \PYG{n}{div} \PYG{l+m+mi}{2}\PYG{p}{)}
+				   \PYG{n}{|} \PYG{n}{Mul}\PYG{p}{(}\PYG{n}{e1}\PYG{p}{,} \PYG{n}{e2}\PYG{p}{)}  \PYG{p}{=\PYGZgt{}} \PYG{p}{(}\PYG{k+kr}{fn} \PYG{n}{x} \PYG{p}{=\PYGZgt{}} \PYG{k+kr}{fn} \PYG{n}{y} \PYG{p}{=\PYGZgt{}} \PYG{p}{(}\PYG{n}{compute} \PYG{n}{e1} \PYG{n}{x} \PYG{n}{y}\PYG{p}{)} \PYG{n}{*} \PYG{p}{(}\PYG{n}{compute} \PYG{n}{e2} \PYG{n}{x} \PYG{n}{y}\PYG{p}{));}
+
+\PYG{c+cm}{(* test di calcolo *)}
+\end{Verbatim}

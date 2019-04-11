@@ -1,0 +1,53 @@
+\section{Settembre 2017}
+
+\subsection{Testo d'esame}
+
+Si consideri il tipo di dato
+
+\begin{smlcode}
+datatype intonil = Nil | Int of int
+\end{smlcode}
+
+ed una possibile implementazione semplificata di ambiente (che considera solo valori interi) basata su di esso:
+
+\begin{smlcode}
+type ambiente = string -> intonil
+\end{smlcode}
+
+In questa implementazione, un ambiente è rappresentato da una funzione che mappa nomi (valori di tipo \texttt{string}) in valori di tipo \texttt{intonil} (che rappresentano un intero o nessun valore). Tale funzione applicata ad un nome ritorna il valore intero ad esso associato oppure \texttt{Nil}.
+
+\medskip
+Usando questa convenzione, l'ambiente vuoto (in cui nessun nome è associato a valori) può essere definito come:
+
+\begin{smlcode}
+val ambientevuoto = fn _:string => Nil;
+\end{smlcode}
+
+Basandosi su queste definizioni, si definisca una funzione ``\texttt{lega}'' con tipo ``\texttt{ambiente -> string -> int -> ambiente}''. che a partire da un ambiente (primo argomento) genera un nuovo ambiente (valore di ritorno) uguale al primo argomento più un legame fra il nome e l'intero ricevuti come secondo e terzo argomento.
+
+\medskip
+\textbf{IMPORTANTE}: notare il tipo della funzione! Come si può intuire da tale tipo, usa la \emph{tecnica del currying} per gestire i suoi due argomenti.
+
+\medskip
+A titolo di esempio:
+\begin{itemize}
+	\item \texttt{((lega ambientevuoto "a" 1) "a")} deve ritornare \texttt{Int 1};
+	\item \texttt{((lega ambientevuoto "a" 1) "boh")} deve ritornare \texttt{Nil};
+	\item \texttt{((lega (lega ambientevuoto "a" 1) "boh" ~1) "boh")} deve ritornare \texttt{Int ~1};
+	\item \texttt{((lega (lega ambientevuoto "a" 1) "boh" ~1) "mah")} deve ritornare \texttt{Nil}.
+\end{itemize}
+
+\subsection{Soluzione}
+
+\begin{listing}{!h}
+\smlfile{assets/codes/2017.09/lega.sml}
+\caption[]{Definizione della funzione \texttt{lega}}
+\end{listing}
+
+\subsection{Commento della soluzione}
+
+La \texttt{e} indica simbolicamete l'\texttt{ambiente}, mentre la \texttt{n} il \texttt{nome}.
+
+\subsection*{Esempio di esecuzione}
+
+TODO

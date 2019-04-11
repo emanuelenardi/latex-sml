@@ -1,0 +1,174 @@
+\usepackage{comment}
+\usepackage{xparse}
+\usepackage{pgffor}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+
+% \usepackage[autostyle]{csquotes}
+\usepackage[useregional]{datetime2}
+
+\usepackage[
+	% ,activate	= {true, nocompatibility}
+	,activate	= {true}
+	,final
+	% ,draft
+	,tracking	= true
+	,kerning	= true
+	% ,spacing	= true
+	,factor		= 1100
+	,stretch	= 10
+	,shrink		= 10
+]{microtype}
+
+% NOTE non stampa il numero delle sezioni
+\setcounter{secnumdepth}{0}
+
+\usepackage{amssymb, mathtools}
+
+\usepackage{tikz}
+\newcommand{\ExternalLink}{
+	\tikz[x = 1.2ex, y = 1.2ex, baseline = -0.05ex]{
+		\begin{scope}[x = 1ex, y = 1ex]
+			\clip (-0.1,-0.1) --++ (-0, 1.2) --++ (0.6, 0) --++ (0, -0.6) --++ (0.6, 0) --++ (0, -1);
+			\path[draw, line width = 0.5, rounded corners = 0.5] (0,0) rectangle (1,1);
+		\end{scope}
+		\path[draw, line width = 0.5] (0.5, 0.5) -- (1, 1);
+		\path[draw, line width = 0.5] (0.6, 1) -- (1, 1) -- (1, 0.6);
+	}
+}
+
+\usepackage{geometry}
+\usepackage{multicol}
+\usepackage{fontawesome}
+\usepackage{fancyhdr}
+\fancypagestyle{pageReference}{
+	\fancyhf{}
+	\cfoot{\footnotesize Pagina~\thepage\ di~\pageref{LastPage}}
+	\renewcommand{\headrulewidth}{0pt}
+	\renewcommand{\footrulewidth}{0pt}
+}
+
+\usepackage{graphicx}
+\usepackage{caption, underscore}
+\captionsetup{
+	,font          = small
+	,labelfont     = {sf, bf}
+	,justification = centering
+	,skip          = 0pt
+}
+
+\usepackage{array, booktabs, float}
+
+\usepackage[newfloat, cachedir=_minted-cache]{minted}
+\usemintedstyle{manni}
+
+\SetupFloatingEnvironment{listing}{listname=Lista dei codici}
+
+\newmintinline[smlinline]{sml}{}
+\newminted[smlcode]{sml}{frame=none}
+\newminted[cppcode]{cpp}{frame=none}
+% \newmint[sml]{sml}{frame=none}
+\newmintedfile[smlfile]{sml}{frame=none}
+% \newmintedfile[smlfile]{sml}{showspaces}
+
+\setminted{
+	,breaklines  = true
+	,frame       = lines
+	,fontsize    = \footnotesize
+	,fontseries  = bold
+	,texcomments
+	,mathescape
+}
+
+\setminted[sml]{
+	,linenos = false
+	,tabsize = 4
+}
+
+\usepackage{titling}
+\NewDocumentCommand{\subtitle}{m}{%
+	\posttitle{%
+		\par\end{center}
+		\begin{center}\large#1\end{center}
+		\vskip0.5em}%
+}
+
+\NewDocumentCommand{\foreign}{m}{\emph{#1}}
+
+\usepackage{changelog}
+\usepackage[
+	type       = CC,
+	modifier   = by-nc-sa,
+	version    = 4.0,
+	imagewidth = 4em,
+]{doclicense}
+
+\usepackage{xcolor}
+\colorlet{darker}{blue!50!black}
+
+\usepackage{background}
+\backgroundsetup{
+	,pages    = all
+	,contents = \fbox{\texttt{\doclicenseIcon \small Emanuele Nardi, {\docversion} - {\today}}}
+	,color    = darker
+	,position = current page.south east
+	,hshift   = -9cm
+	,vshift   = -2.5cm
+	,opacity  = 1
+	,angle    = -90
+	,scale    = 1
+}
+
+\usepackage{afterpage}
+\newcommand{\blankpage}{%
+	\clearpage%
+	\begingroup%
+		\thispagestyle{empty}%
+		\addtocounter{page}{-1}%
+		\vspace*{\stretch{4}}%
+		\centering%
+		Questa pagina è stata lasciata vuota intenzionalmente%
+		\vspace*{\stretch{1}}%
+		\clearpage%
+    \endgroup%
+}
+
+\usepackage{bookmark}
+\bookmarksetup{open, openlevel=1}
+
+\newcommand{\Author}{Emanuele Nardi}
+\newcommand{\Subject}{Programmazione Funzionale}
+\newcommand{\Keywords}{Functional Programming, Standard ML}
+\newcommand{\Creator}{Emanuele Nardi}
+\newcommand{\Producer}{LaTeX}
+
+\usepackage{hyperref}
+\hypersetup{
+	pdfinfo = {
+		Title       = {\Title},
+		Author      = {\Author},
+		Subject     = {\Subject},
+		Creator     = {\Creator},
+		Producer    = {\Producer},
+		Keywords    = {\Keywords},
+	}
+	,backref	= true
+	,hidelinks		= true
+	,colorlinks		= true
+	% ,allcolors = darker
+	,linkcolor	 	= red
+	,anchorcolor	= black
+	,citecolor	 	= green
+	,filecolor	 	= cyan
+	,menucolor	 	= red
+	,runcolor 		= cyan
+	,urlcolor		= magenta
+	,pdfpagemode	= UseOutlines
+	,pdfpagelayout	= TwoPageRight
+	,pdfnewwindow	= true
+}
+
+\author{Emanuele Nardi}
+\date{Compilato il \today\\\texttt{\docversion}}

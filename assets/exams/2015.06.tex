@@ -1,0 +1,83 @@
+\section{Giugno 2015}
+
+\subsection{Testo d'esame}
+
+Come noto, un numero naturale è esprimibile in base agli assiomi di Peano usando il seguente tipo di dato:
+
+\begin{listing}[!h]
+\smlfile{assets/codes/2015.06/nat.sml}
+\caption[Tipo di dato \texttt{naturale}]{Definizione di numero naturale}
+\end{listing}
+
+Usando tale tipo di dato, la \texttt{somma} fra numeri naturali è esprimibile come:
+
+\begin{listing}[!h]
+\smlfile{assets/codes/2015.06/nat-somma.sml}
+\caption[Funzione \texttt{somma}]{Definizione della funzione \texttt{somma}}
+\end{listing}
+
+Scrivere una funzione Standard ML, chiamata \texttt{prodotto}, che ha tipo \texttt{naturale -> naturale -> naturale}, che calcola il prodotto di due numeri naturali. Si noti che la funzione prodotto può usare la funzione \texttt{somma} nella sua implementazione.
+
+\subsection{Guida alla soluzione}
+
+Prendiamo confidenza con il tipo di dato definito:
+
+\begin{listing}[!h]
+\begin{smlcode}
+> zero;
+val it = zero: naturale
+
+> successivo(successivo zero);
+val it = successivo (successivo zero): naturale
+\end{smlcode}
+\caption[]{Dichiarazione di numeri naturali}
+\end{listing}
+
+\subsubsection*{Commento sull'implementazione della funzione somma}
+
+La somma fra numeri naturali è esprimibile in due modi, equivalenti fra loro.
+Uno è quello illustrato dal professore, l'altro è il seguente:
+
+\begin{listing}[!h]
+\smlfile{assets/codes/2015.06/nat-somma-alt.sml}
+\caption[Funzione \texttt{somma} alternativa]{Definizione alternativa della funzione \texttt{somma}}
+\end{listing}
+
+Entrambe le definizioni della funzione \texttt{somma} sono corrette. Nella prima definizione il caso \emph{successivo a} restituisce una funzione che mappa una variabile \texttt{n} nel successivo della somma di \texttt{a} con \texttt{n}, nella seconda definizione, invece, il caso \emph{successivo a} restituisce una funzione che mappa una variabile \texttt{n} nella somma di \texttt{a} con il successivo di \texttt{n}.
+
+\medskip
+Il funzionamento dell'esecuzione della funzione \texttt{somma} fra due numeri naturali è la seguente:
+\begin{quote}
+bisogna togliere un valore \texttt{successivo} al primo addendo affinché risulti pari al caso base (cioè zero).
+\end{quote}
+Questo lo si fa o aggiungendo un valore \texttt{successivo} alla somma del primo addendo con il secondo (1\textsuperscript{a} implementazione) o sommando il primo addendo con il successivo del secondo addendo (2\textsuperscript{a} implementazione).
+
+La funzione \texttt{somma}, quindi, non svolge nient'altro che una funzione di \foreign{wrapper} per la ricorsione la quale finisce nel momento in cui il valore associato alla variabile \texttt{a} raggiunge il caso base, ossia \texttt{zero}.
+
+\begin{listing}[!h]
+\begin{smlcode}
+> somma (successivo zero) (successivo (successivo zero));
+val it = successivo (successivo (successivo zero)): naturale
+\end{smlcode}
+\caption[]{Esecuzione di \texttt{somma}}
+\end{listing}
+
+Ovvero: la somma di 1 e 2, risulta 3.
+
+\subsection{Soluzione}
+
+Utilizziamo quindi la funzione \texttt{somma} nell'implementazione della funzione \texttt{prodotto}.
+
+\begin{listing}[!h]
+\smlfile{assets/codes/2015.06/nat-prodotto.sml}
+\caption[Funzione \texttt{prodotto}]{Definizione della funzione \texttt{prodotto}}
+\end{listing}
+
+\subsection*{Esempio di esecuzione}
+
+Mostriamo un esempio di esecuzione della funzione \texttt{prodotto}:
+
+\begin{listing}[!h]
+\smlfile{assets/codes/2015.06/exec.sml}
+\caption[Esempio di esecuzione]{Esempio di esecuzione}
+\end{listing}

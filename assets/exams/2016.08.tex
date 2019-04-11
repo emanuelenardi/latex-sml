@@ -1,0 +1,73 @@
+\section{Agosto 2016}
+
+\subsection{Testo d'esame}
+
+Si consideri una possibile implementazione degli insiemi di interi in standard ML, in cui un insieme di interi rappresentato da una funzione da \texttt{int} a \texttt{bool}:
+
+\begin{listing}{!h}
+\begin{smlcode}
+type insiemediinteri = int -> bool;
+\end{smlcode}
+\caption[]{Definizione del tipo di dato \texttt{insiemidiinteri}}
+\end{listing}
+
+La funzione applicata ad un numero intero ritorna true se il numero appartiene all'insieme, false altrimenti. L'insieme vuoto è quindi rappresentato da una funzione che ritorna sempre false:
+
+\begin{listing}{!h}
+\begin{smlcode}
+val vuoto:insiemediinteri = fn n => false;
+
+val vuoto = fn: insiemediinteri
+\end{smlcode}
+\caption{Definizione della funzione \texttt{vuoto}}
+\end{listing}
+
+ed un intero può essere aggiunto ad un insieme tramite la funzione aggiungi:
+
+\begin{listing}{!h}
+\begin{smlcode}
+val aggiungi = fn f:insiemediinteri => fn x:int =>
+(fn n:int => if (n = x) then
+							true
+						else
+							false
+):insiemediinteri;
+
+val aggiungi = fn: insiemediinteri -> int -> insiemediinteri
+\end{smlcode}
+\caption[]{Definizione della funzione \texttt{aggiungi}}
+\end{listing}
+
+\'E possibile verificare se un intero è contenuto in un insieme tramite la funzione contiene:
+
+\begin{listing}{!h}
+\begin{smlcode}
+val contiene = fn f:insiemediinteri => fn n:int => f n;
+\end{smlcode}
+\caption[]{Definizione della funzione \texttt{contiene}}
+\end{listing}
+
+Si implementi la funzione \texttt{intersezione}, avente tipo \texttt{insiemediinteri -> insiemediinteri -> insiemediinteri}, che dati due insiemi di interi ne calcola l'intersezione.
+
+\textbf{IMPORTANTE}: notare il tipo della funzione! Come si può intuire da tale tipo, usa la \emph{tecnica del currying} per gestire i suoi due argomenti.
+
+\subsection{Soluzione}
+
+\begin{listing}{!h}
+\smlfile{assets/codes/2016.08/intersezione.sml}
+\caption[]{Definizione della funzione \texttt{intersezione}}
+\end{listing}
+
+\subsection{Commento della soluzione}
+
+Si può arrivare alla soluzione per passi analizzando
+
+\begin{smlcode}
+((contiene i1 n) andalso (contiene i2 n))
+\end{smlcode}
+
+L'operatore \texttt{andalso} implementa l'operazione logica \emph{and}, mentre l'operatore \texttt{orelse} implementa l'operazione logica \emph{or}.
+
+\subsection*{Esempio di esecuzione}
+
+TODO

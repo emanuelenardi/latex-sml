@@ -1,0 +1,143 @@
+\section{Luglio 2016}
+
+\subsection{Turno 1}
+
+\subsubsection{Testo}
+
+Si consideri il tipo di dato
+\begin{listing}{!h}
+\smlfile{assets/codes/2016.07/lambda.sml}
+\caption[]{Definizione del tipo di dato \texttt{espressione Lambda}}
+\end{listing}
+che rappresenta un'espressione del Lambda-calcolo.
+
+\medskip
+Il costruttore \texttt{Var} crea un'espressione costituita da un'unica funzione/variabile (il cui nome è un valore di tipo \texttt{string});
+il costruttore \texttt{Lambda} crea una Lambda-espressione a partire da un'altra espressione, legandone una variabile (indicata da un valore di tipo string);
+il costruttore \texttt{Apply} crea un'espressione data dall'applicazione di un'espressione ad un'altra.
+
+\medskip
+Si scriva una funzione \texttt{is_free} (avente tipo \texttt{string -> lambda_expr -> bool}) che riceve come argomenti una stringa (che rappresenta il nome di una variabile / funzione) ed una Lambda-espressione, %
+ritornando \texttt{true} se \emph{la variabile indicata appare come libera nell'espressione}, %
+\texttt{false} altrimenti (quindi, la funzione ritorna false se la variabile è legata o se non appare nell'epressione).
+
+\medskip
+Come esempio, l'invocazione
+
+\begin{smlcode}
+is_free "a" (Var "a")
+\end{smlcode}
+
+deve avere risultato true, l'invocazione
+
+\begin{smlcode}
+is_free "b" (Var "a")
+\end{smlcode}
+
+deve avere risultato false, l'invocazione
+
+\begin{smlcode}
+is_free "a" (Lambda ("a", Apply((Var "a"), Var "b")))
+\end{smlcode}
+
+deve avere risultato false, l'invocazione
+
+\begin{smlcode}
+is_free "b" (Lambda ("a", Apply((Var "a"), Var "b")))
+\end{smlcode}
+
+deve avere risultato true e così via.
+
+\medskip
+\textbf{IMPORTANTE}: notare il tipo della funzione! La funzione usa la \emph{tecnica del currying} per gestire i due argomenti.
+
+\subsubsection{Soluzione}
+
+\begin{listing}{!h}
+\begin{smlcode}
+datatype lambda_expr = Var of string
+					 | Lambda of string * lambda_expr
+					 | Apply of lambda_expr * lambda_expr;
+\end{smlcode}
+\caption[]{Definizione del tipo di dato \texttt{espressione Lambda}}
+\end{listing}
+
+\begin{listing}{!h}
+\begin{smlcode}
+val rec is_free = fn s => fn Var v => if (s = v) then
+									      true
+									  else
+									      false
+				| Lambda (v, e) => if (s = v) then
+									   false
+								   else
+									   is_free s e
+				| Apply (e1, e2) => (is_free s e1) orelse (is_free s e2);
+
+val is_free = fn: string -> lambda_expr -> bool
+\end{smlcode}
+\caption{Definizione della funzione \texttt{is_free}}
+\end{listing}
+
+\subsection{Commento della soluzione}
+
+TODO
+
+\subsection{Turno 2}
+
+\subsubsection{Testo}
+
+Basandosi sul tipo di dato \texttt{espressione} e la funzione \texttt{eval} definiti come segue:
+
+\begin{listing}{!h}
+\smlfile{assets/codes/2016.07/semplifica.sml}
+\caption{Definizione della funzione \texttt{semplifica}}
+\end{listing}
+
+il tipo espressione può essere esteso come segue per supporare il concetto di variabile:
+
+\begin{listing}{!h}
+\smlfile{assets/codes/2016.07/espressione.sml}
+\caption{Definizione del tipo di dato \texttt{espressione}}
+\end{listing}
+
+Si riscriva la funzione \texttt{eval} per supportare i due nuovi costruttori \texttt{variabile} e \texttt{var. variabile x}, con \texttt{x} di tipo stringa, é valutata al valore della variabile di nome \texttt{x} (per fare questo, \texttt{eval} deve cercare nell'ambiente un legame fra tale nome ed un valore). %
+\texttt{var (x, e1, e2)} é valutata al valore di \texttt{e2} dopo aver assegnato ad \texttt{x} il valore di \texttt{e1}.
+
+\medskip
+Per poter valutare correttamente \texttt{variabile} e \texttt{var}, \texttt{eval} deve quindi ricevere come argomento l'ambiente in cui valutare le variabili. %
+Tale ambiente può essere rappresentato come una lista di coppie (stringa, intero) ed avra' quindi tipo \texttt{(string * int) list}.
+
+\medskip
+La funzione \texttt{eval} deve quindi avere tipo \texttt{(string * int) list -> espressione -> int}.
+
+\subsubsection{Soluzione}
+
+Questa é una possibile soluzione. %
+Si noti che in questa soluzione la funzione \texttt{cerca} viene definita come visibile a tutti, mentre sarebbe più opportuno renderla locale a \texttt{eval} usando un costrutto \texttt{let} o \texttt{local}.
+
+\begin{listing}{!h}
+% [highlightlines={6,11}]
+\begin{smlcode}
+val rec cerca = fn s => fn [] => 0
+						 | (s1, v)::l => if s1 = s then v else cerca s l;
+
+val rec eval = fn env =>
+			   fn costante    n           => n
+				| variabile   s           => cerca s env
+				| somma       (a1, a2)    => (eval env a1) +   (eval env a2)
+				| sottrazione (a1, a2)    => (eval env a1) -   (eval env a2)
+				| prodotto    (a1, a2)    => (eval env a1) *   (eval env a2)
+				| divisione   (a1, a2)    => (eval env a1) div (eval env a2)
+				| var (v, e1, e2) => eval ((v, eval env e1)::env) e2;
+\end{smlcode}
+\caption[]{Definizione della funzione \texttt{eval}}
+\end{listing}
+
+\subsection{Commento della soluzione}
+
+Gli operatori \texttt{+}, \texttt{-}, \texttt{*}. \texttt{div} si preoccupano di implementare la logica matematica del programma.
+
+\subsection*{Esempio di esecuzione}
+
+TODO

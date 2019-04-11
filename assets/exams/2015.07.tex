@@ -1,0 +1,49 @@
+\section{Luglio 2015}
+
+\subsection{Testo d'esame}
+
+Si consideri il seguente tipo di dato, che rappresenta una semplice espressione avente due argomenti \(x\) e \(y\):
+
+\begin{listing}[!h]
+\smlfile{assets/codes/2015.07/expr.sml}
+\caption{Definizione di \texttt{Expr}}
+\end{listing}
+
+dove il costruttore \texttt{X} rappresenta il valore del primo argomento \texttt{x} dell'espressione,
+il costruttore \texttt{Y} rappresenta il valore del secondo argomento \texttt{y},
+il costruttore \texttt{Avg}, che si applica ad una coppia \texttt{(e1, e2)}, rappresenta la media (intera) dei valori di \texttt{e1} ed \texttt{e2},
+mentre il costruttore \texttt{Mul} (che ancora si applica ad una coppia \texttt{(e1, e2)}) rappresenta il prodotto dei valori di due espressioni \texttt{e1} ed \texttt{e2}.
+
+\medskip
+Implementare una funzione Standard ML, chiamata \texttt{compute}, che ha tipo \texttt{Expr -> int -> int -> int}.
+
+\medskip
+Come suggerito dal nome, \texttt{compute} calcola il valore dell'espressione ricevuta come primo argomento, applicandola ai valori ricevuti come secondo e terzo argomento e ritorna un intero che indica il risultato finale della valutazione.
+
+\medskip
+\textbf{IMPORTANTE}: notare il tipo della funzione! Come si può intuire da tale tipo, la funzione riceve tre argomenti usando la tecnica del \emph{currying}. \'E importante che la funzione abbia il tipo corretto (indicato qui sopra). Una funzione avente tipo diverso da \texttt{Expr -> int -> int -> int} non sarà considerata corretta.
+
+\subsection{Soluzione}
+
+\begin{listing}[!h]
+\smlfile{assets/codes/2015.07/compute.sml}
+\caption{Definizione della funzione \texttt{compute}}
+\end{listing}
+
+\subsection{Guida alla soluzione}
+
+Il problema si risolve con una funzione ricorsiva, che sfrutta la definizione del tipo di dato \texttt{Expr} e la tecnica  \emph{currying} per arrivare alla soluzione.
+Nota come la definizione del tipo della funzione (\texttt{Expr -> int -> int -> int}) risulti un ottimo suggerimento per la risoluzione del problema.
+
+La funzione individua 4 casi particolari: \texttt{X}, \texttt{Y}, \texttt{Avg(e1, e2)} ed infine \texttt{Mul(e1, e2)} tutti definiti in termini del dato \texttt{Expr}.
+In ognuno dei casi vengono restituite due funzioni, le quali raccolgono i dati che verranno rielaborati nell'ultimo passaggio;
+l'unico nella quale viene implementata la logica di calcolo.
+
+\subsection*{Esempio di esecuzione}
+
+Mostriamo un esempio di esecuzione della funzione \texttt{compute}:
+
+\begin{listing}[!h]
+\smlfile{assets/codes/2015.07/exec.sml}
+\caption[]{Esempio di esecuzione}
+\end{listing}

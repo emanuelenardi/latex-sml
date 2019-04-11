@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYG{k+kr}{fun} \PYG{n+nf}{succ} \PYG{n}{n} \PYG{p}{=} \PYG{n}{n} \PYG{n}{+} \PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{k+kr}{val} \PYG{n+nv}{succ} \PYG{p}{=} \PYG{k+kr}{fn} \PYG{p}{:} \PYG{n}{int} \PYG{p}{\PYGZhy{}\PYGZgt{}} \PYG{n}{int}
+\end{Verbatim}

@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYG{k+kr}{local}
+	\PYG{k+kr}{val} \PYG{n+nv}{rec} \PYG{n}{eval} \PYG{p}{=} \PYG{k+kr}{fn} \PYG{n}{costante}     \PYG{n}{n}        \PYG{p}{=\PYGZgt{}} \PYG{n}{n}
+					\PYG{n}{|} \PYG{n}{somma}        \PYG{p}{(}\PYG{n}{a1}\PYG{p}{,} \PYG{n}{a2}\PYG{p}{)} \PYG{p}{=\PYGZgt{}} \PYG{p}{(}\PYG{n}{eval} \PYG{n}{a1}\PYG{p}{)} \PYG{n}{+} \PYG{p}{(}\PYG{n}{eval} \PYG{n}{a2}\PYG{p}{)}
+					\PYG{n}{|} \PYG{n}{sottrazione}  \PYG{p}{(}\PYG{n}{a1}\PYG{p}{,} \PYG{n}{a2}\PYG{p}{)} \PYG{p}{=\PYGZgt{}} \PYG{p}{(}\PYG{n}{eval} \PYG{n}{a1}\PYG{p}{)} \PYG{n}{\PYGZhy{}} \PYG{p}{(}\PYG{n}{eval} \PYG{n}{a2}\PYG{p}{)}
+					\PYG{n}{|} \PYG{n}{prodotto}     \PYG{p}{(}\PYG{n}{a1}\PYG{p}{,} \PYG{n}{a2}\PYG{p}{)} \PYG{p}{=\PYGZgt{}} \PYG{p}{(}\PYG{n}{eval} \PYG{n}{a1}\PYG{p}{)} \PYG{n}{*} \PYG{p}{(}\PYG{n}{eval} \PYG{n}{a2}\PYG{p}{)}
+					\PYG{n}{|} \PYG{n}{divisione}    \PYG{p}{(}\PYG{n}{a1}\PYG{p}{,} \PYG{n}{a2}\PYG{p}{)} \PYG{p}{=\PYGZgt{}} \PYG{p}{(}\PYG{n}{eval} \PYG{n}{a1}\PYG{p}{)} \PYG{n}{div} \PYG{p}{(}\PYG{n}{eval} \PYG{n}{a2}\PYG{p}{);}
+\PYG{k+kr}{in}
+	\PYG{k+kr}{val} \PYG{n+nv}{semplifica} \PYG{p}{=} \PYG{k+kr}{fn} \PYG{n}{costante}     \PYG{n}{n}        \PYG{p}{=\PYGZgt{}} \PYG{n}{costante}\PYG{p}{(}\PYG{n}{n}\PYG{p}{)}
+					  \PYG{n}{|} \PYG{n}{somma}        \PYG{p}{(}\PYG{n}{a1}\PYG{p}{,} \PYG{n}{a2}\PYG{p}{)} \PYG{p}{=\PYGZgt{}} \PYG{n}{costante}\PYG{p}{((}\PYG{n}{eval} \PYG{n}{a1}\PYG{p}{)} \PYG{n}{+} \PYG{p}{(}\PYG{n}{eval} \PYG{n}{a2}\PYG{p}{))}
+					  \PYG{n}{|} \PYG{n}{sottrazione}  \PYG{p}{(}\PYG{n}{a1}\PYG{p}{,} \PYG{n}{a2}\PYG{p}{)} \PYG{p}{=\PYGZgt{}} \PYG{n}{costante}\PYG{p}{((}\PYG{n}{eval} \PYG{n}{a1}\PYG{p}{)} \PYG{n}{\PYGZhy{}} \PYG{p}{(}\PYG{n}{eval} \PYG{n}{a2}\PYG{p}{))}
+					  \PYG{n}{|} \PYG{n}{prodotto}     \PYG{p}{(}\PYG{n}{a1}\PYG{p}{,} \PYG{n}{a2}\PYG{p}{)} \PYG{p}{=\PYGZgt{}} \PYG{n}{costante}\PYG{p}{((}\PYG{n}{eval} \PYG{n}{a1}\PYG{p}{)} \PYG{n}{*} \PYG{p}{(}\PYG{n}{eval} \PYG{n}{a2}\PYG{p}{))}
+					  \PYG{n}{|} \PYG{n}{divisione}    \PYG{p}{(}\PYG{n}{a1}\PYG{p}{,} \PYG{n}{a2}\PYG{p}{)} \PYG{p}{=\PYGZgt{}} \PYG{n}{costante}\PYG{p}{((}\PYG{n}{eval} \PYG{n}{a1}\PYG{p}{)} \PYG{n}{div} \PYG{p}{(}\PYG{n}{eval} \PYG{n}{a2}\PYG{p}{))}
+\PYG{k+kr}{end}\PYG{p}{;}
+\end{Verbatim}

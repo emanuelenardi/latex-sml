@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYG{k+kr}{val} \PYG{n+nv}{rec} \PYG{n}{hist} \PYG{p}{=} \PYG{k+kr}{fn}
+				  \PYG{p}{[]}        \PYG{p}{=\PYGZgt{}} \PYG{p}{(}\PYG{k+kr}{fn} \PYG{p}{(}\PYG{n}{c}\PYG{p}{:}\PYG{n}{real}\PYG{p}{,} \PYG{n}{d}\PYG{p}{:}\PYG{n}{real}\PYG{p}{)} \PYG{p}{=\PYGZgt{}} \PYG{l+m+mi}{0}\PYG{p}{)}
+				\PYG{n}{|} \PYG{p}{[}\PYG{n}{e}\PYG{p}{]}       \PYG{p}{=\PYGZgt{}} \PYG{p}{(}\PYG{k+kr}{fn} \PYG{p}{(}\PYG{n}{c}\PYG{p}{:}\PYG{n}{real}\PYG{p}{,} \PYG{n}{d}\PYG{p}{:}\PYG{n}{real}\PYG{p}{)} \PYG{p}{=\PYGZgt{}} \PYG{k+kr}{if} \PYG{p}{(}\PYG{n}{e} \PYG{n}{\PYGZgt{}} \PYG{p}{(}\PYG{n}{c\PYGZhy{}d}\PYG{p}{)} \PYG{k+kr}{andalso} \PYG{n}{e} \PYG{n}{\PYGZlt{}} \PYG{p}{(}\PYG{n}{c+d}\PYG{p}{))} \PYG{k+kr}{then}
+													       \PYG{l+m+mi}{1}
+													   \PYG{k+kr}{else}
+													       \PYG{l+m+mi}{0}\PYG{p}{)}
+				\PYG{n}{|} \PYG{p}{(}\PYG{n}{e} \PYG{n}{::} \PYG{n}{l}\PYG{p}{)}  \PYG{p}{=\PYGZgt{}} \PYG{p}{(}\PYG{k+kr}{fn} \PYG{p}{(}\PYG{n}{c}\PYG{p}{:}\PYG{n}{real}\PYG{p}{,} \PYG{n}{d}\PYG{p}{:}\PYG{n}{real}\PYG{p}{)} \PYG{p}{=\PYGZgt{}} \PYG{k+kr}{if} \PYG{p}{(}\PYG{n}{e} \PYG{n}{\PYGZgt{}} \PYG{p}{(}\PYG{n}{c\PYGZhy{}d}\PYG{p}{)} \PYG{k+kr}{andalso} \PYG{n}{e} \PYG{n}{\PYGZlt{}} \PYG{p}{(}\PYG{n}{c+d}\PYG{p}{))} \PYG{k+kr}{then}
+													       \PYG{l+m+mi}{1} \PYG{n}{+} \PYG{n}{hist} \PYG{n}{l} \PYG{p}{(}\PYG{n}{c}\PYG{p}{,} \PYG{n}{d}\PYG{p}{)}
+													   \PYG{k+kr}{else}
+													       \PYG{l+m+mi}{0} \PYG{n}{+} \PYG{n}{hist} \PYG{n}{l} \PYG{p}{(}\PYG{n}{c}\PYG{p}{,} \PYG{n}{d}\PYG{p}{));}
+\end{Verbatim}

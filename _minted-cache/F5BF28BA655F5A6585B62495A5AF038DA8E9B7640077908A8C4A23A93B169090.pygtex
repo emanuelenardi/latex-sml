@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGZdl{} sudo apt install polyml rlwrap    \PYG{c+c1}{\PYGZsh{} installazione}
+\PYGZdl{} \PYG{n+nb}{alias} \PYG{n+nv}{poly}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}rlwrap poly\PYGZsq{}}          \PYG{c+c1}{\PYGZsh{} defizione di alias}
+\PYGZdl{} poly                              \PYG{c+c1}{\PYGZsh{} esecuzione della REPL}
+\end{Verbatim}

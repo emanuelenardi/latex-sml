@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYG{k+kr}{datatype} \PYG{k+kt}{lambda\PYGZus{}expr} \PYG{p}{=} \PYG{n+nc}{Var} \PYG{k+kr}{of} \PYG{n}{string}
+					 \PYG{p}{|} \PYG{n+nc}{Lambda} \PYG{k+kr}{of} \PYG{n}{string} \PYG{n}{*} \PYG{n}{lambda\PYGZus{}expr}
+					 \PYG{p}{|} \PYG{n+nc}{Apply} \PYG{k+kr}{of} \PYG{n}{lambda\PYGZus{}expr} \PYG{n}{*} \PYG{n}{lambda\PYGZus{}expr}\PYG{p}{;}
+\end{Verbatim}

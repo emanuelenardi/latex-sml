@@ -1,0 +1,121 @@
+\section{Settembre 2015}
+
+\subsection{Testo d'esame}
+
+Si consideri il seguente tipo di dato:
+
+\begin{listing}[!h]
+\smlfile{assets/codes/2015.09/codice.sml}
+\caption[]{Definizione del tipo di dato \texttt{codice}}
+\end{listing}
+che rappresenta un paziente in arrivo al pronto soccorso.
+
+\medskip
+La stringa rappresenta il cognome del paziente, mentre i tre diversi costruttori \texttt{rosso}, \texttt{giallo} e \texttt{verde} rappresentano la gravità del paziente (codice \texttt{rosso}: massima gravità/urgenza, codice \texttt{verde}: minima gravità/urgenza).
+
+\medskip
+Quando un paziente con codice \texttt{rosso} arriva al pronto soccorso, viene messo in lista d'attesa dopo tutti i pazienti con codice \texttt{rosso} (ma prima di quelli con codice \texttt{giallo} o verde); quando arriva un paziente con codice \texttt{giallo}, viene messo in lista d'attesa dopo tutti i pazienti con codice \texttt{rosso} o \texttt{giallo} (ma prima di quelli con codice \texttt{verde}), mentre quando arriva un paziente con codice \texttt{verde} viene messo in lista d'attesa dopo tutti gli altri pazienti.
+
+\medskip
+Si scriva una funzione \texttt{arriva} (avente tipo \texttt{codice list -> codice -> codice list}) che riceve come argomenti la lista dei pazienti in attesa (lista di elementi di tipo codice) ed un paziente appena arrivato (elemento di tipo codice) e ritorna la lista aggiornata dei pazienti in attesa (dopo aver inserito il nuovo paziente nel giusto posto in coda).
+
+\medskip
+Come esempio, l'invocazione
+
+\begin{smlcode}
+arriva [rosso "topolino", rosso "cip", giallo "ciop", verde "paperino", verde "pluto"] (giallo "clarabella");}
+\end{smlcode}
+
+deve avere risultato
+
+\begin{smlcode}
+[rosso "topolino", rosso "cip", giallo "ciop", giallo "clarabella", verde "paperino", verde "pluto"]}
+\end{smlcode}
+
+\medskip
+\textbf{IMPORTANTE}: notare il tipo della funzione! Si noti inoltre che la funzione usa la \emph{tecnica del currying} per gestire i due argomenti.
+
+\subsection{Soluzione}
+
+\begin{listing}[!h]
+\inputminted{sml}{assets/codes/2015.09/arriva-alt.sml}
+\caption[]{Definizione del tipo di dato \texttt{codice}}
+\end{listing}
+
+\subsection{Commento della soluzione}
+
+La funzione \texttt{arriva} crea una nuova lista, sulla base della lista di partenza, posizionando gli elementi dati in input nella posizione approppriata. %
+Come? Inserendo tutti gli elementi della lista iniziale seguendo delle regole di inserimento da noi definite.
+
+La magia di questa funzione risiede nel meccanismo di \emph{pattern matching} che permette di associare nomi, \texttt{n} e \texttt{nn} nel nostro caso, agli elementi da inserire e già inseriti all'interno della nuova lista.
+
+\subsection{Implementare le priorità}
+
+La funzione \texttt{arriva} costruisce una nuova lista sulla base delle seguenti regole di inserimento.
+
+\medskip
+Nel caso in cui l'elemento da inserire sia verde \texttt{(verde  n)::l} allora \texttt{=>} \dots
+
+\begin{smlcode}
+(fn (verde  nn) => (verde n)::(arriva l (verde nn))
+ |  x           => x::((verde n)::l))
+\end{smlcode}
+
+\dots dev'essere inserito come ultimo fra i verdi, \emph{altrimenti}, \emph{in assenza di altri elementi verdi} presenti all'interno della lista, lo si inserisce alla fine della lista %
+(\texttt{l} in questo caso sarà una lista vuota).
+
+\texttt{verde  nn} rappresenta l'elemento verde da inserire all'interno della nuova lista, mentre \texttt{verde n} è un ipotetico elemente già presente all'interno della nuova lista.
+
+Nota che \emph{la funzione è racchiusa fra parentesi} in modo tale da essere un'espressione valutabile e non una funzione.
+
+\medskip
+Nel caso in cui l'elemento da inserire sia giallo \texttt{(giallo n)::l} allora \texttt{=>} \dots
+
+\begin{smlcode}
+(fn (verde  nn) => (giallo n)::(arriva l (verde nn))
+  | (giallo nn) => (giallo n)::(arriva l (giallo nn))
+  | x           => x::((giallo n)::l))
+\end{smlcode}
+
+\dots \emph{in presenza di soli elementi verdi} (quindi \emph{in assenza di altri elementi gialli o rossi}) presenti all'interno della lista dovrà essere posizionato prima di qualsiasi elemento verde, %
+\emph{altrimenti}, \emph{in presenza di elementi gialli} (quindi \emph{in assenza di altri elementi rossi}) verrà posizionato dopo tutti gli altri elementi gialli, %
+\emph{altrimenti} \emph{in presenza elementi rossi} verrà posizionato dopo quest'ultimi.
+
+\texttt{verde n} è un ipotetico elemente già presente all'interno della nuova lista, mentre \texttt{verde  nn} rappresenta l'elemento verde da inserire all'interno della nuova lista.
+
+Nota che \emph{la funzione è racchiusa fra parentesi} in modo tale da essere un'espressione valutabile e non una funzione.
+
+\medskip
+Nel caso in cui l'elemento da inserire sia rosso \texttt{(rosso  n)::l} allora \texttt{=>} \dots
+
+\begin{smlcode}
+(fn x => (rosso n)::(arriva l x))
+\end{smlcode}
+
+\dots allora qualsiasi siano gli elementi all'interno della lista verranno posizionati dopo l'elemento inserito.
+
+\subsection{Riassumendo}
+
+Un elemento verde dev'essere inserito:
+
+\begin{itemize}
+	\item dopo qualsiasi elemento verde già presente all'interno della lista;
+	\item dopo qualsiasi altro elemento (giallo o rosso).
+\end{itemize}
+
+Un elemento giallo dev'essere inserito:
+
+\begin{itemize}
+	\item \emph{prima} di qualsiasi elemento \emph{verde} già presente all'interno della lista;
+	\item \emph{dopo} qualsiasi elemento \emph{giallo} già presente all'interno della lista;
+	\item \emph{dopo} qualsiasi elemento \emph{rosso} già presente all'interno della lista;
+\end{itemize}
+
+Infine \texttt{[] => (fn x => [x])} rappresenta quindi il caso base, quello in cui la lista \emph{passata come argomento} è vuota e dobbiamo semplicemente copiare l'elemento da inserire ``\texttt{x}'' all'interno della nuova lista.
+
+\subsection*{Esempio di esecuzione}
+
+\begin{listing}[!h]
+\smlfile{assets/codes/2015.09/exec.sml}
+\caption[]{Esempio di esecuzione della funzione \texttt{arriva}}
+\end{listing}

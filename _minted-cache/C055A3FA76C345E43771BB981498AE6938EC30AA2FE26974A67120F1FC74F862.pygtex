@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYG{k+kr}{datatype} \PYG{k+kt}{Expr} \PYG{p}{=} \PYG{n+nc}{X}
+			  \PYG{p}{|} \PYG{n+nc}{Y}
+			  \PYG{p}{|} \PYG{n+nc}{Avg} \PYG{k+kr}{of} \PYG{n}{Expr} \PYG{n}{*} \PYG{n}{Expr}
+			  \PYG{p}{|} \PYG{n+nc}{Mul} \PYG{k+kr}{of} \PYG{n}{Expr} \PYG{n}{*} \PYG{n}{Expr}\PYG{p}{;}
+
+\PYG{c+cm}{(* datatype Expr = Avg of Expr * Expr | Mul of Expr * Expr | X | Y *)}
+\end{Verbatim}

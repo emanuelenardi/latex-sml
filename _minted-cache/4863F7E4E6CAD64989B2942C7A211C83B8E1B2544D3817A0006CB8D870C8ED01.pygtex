@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYG{l+m+mi}{7}\PYG{n}{::}\PYG{p}{[];}
+\PYG{k+kr}{val} \PYG{n+nv}{it} \PYG{p}{=} \PYG{p}{[}\PYG{l+m+mi}{7}\PYG{p}{]:} \PYG{n}{int} \PYG{n}{list}
+\end{Verbatim}

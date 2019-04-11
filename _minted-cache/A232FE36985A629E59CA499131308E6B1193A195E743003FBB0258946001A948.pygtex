@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYG{k+kr}{val} \PYG{n+nv}{intersezione} \PYG{p}{=} \PYG{k+kr}{fn} \PYG{n}{i1}\PYG{p}{:}\PYG{n}{insiemediinteri} \PYG{p}{=\PYGZgt{}} \PYG{k+kr}{fn} \PYG{n}{i2}\PYG{p}{:}\PYG{n}{insiemediinteri} \PYG{p}{=\PYGZgt{}}
+	\PYG{p}{(}\PYG{k+kr}{fn} \PYG{n}{n} \PYG{p}{=\PYGZgt{}}
+		\PYG{p}{((}\PYG{n}{contiene} \PYG{n}{i1} \PYG{n}{n}\PYG{p}{)} \PYG{k+kr}{andalso} \PYG{p}{(}\PYG{n}{contiene} \PYG{n}{i2} \PYG{n}{n}\PYG{p}{))}
+	\PYG{p}{):}\PYG{n}{insiemediinteri}\PYG{p}{;}
+
+\PYG{k+kr}{val} \PYG{n+nv}{intersezione} \PYG{p}{=} \PYG{k+kr}{fn}\PYG{p}{:} \PYG{n}{insiemediinteri} \PYG{p}{\PYGZhy{}\PYGZgt{}} \PYG{n}{insiemediinteri} \PYG{p}{\PYGZhy{}\PYGZgt{}} \PYG{n}{insiemediinteri}
+\end{Verbatim}

@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYG{k+kr}{val} \PYG{n+nv}{lega} \PYG{p}{=} \PYG{k+kr}{fn} \PYG{n}{e}\PYG{p}{:}\PYG{n}{ambiente} \PYG{p}{=\PYGZgt{}}
+	\PYG{k+kr}{fn} \PYG{n}{nome} \PYG{p}{=\PYGZgt{}}
+		\PYG{k+kr}{fn} \PYG{n}{valore} \PYG{p}{=\PYGZgt{}}
+			\PYG{p}{(}\PYG{k+kr}{fn} \PYG{n}{n} \PYG{p}{=\PYGZgt{}} \PYG{k+kr}{if} \PYG{p}{(}\PYG{n}{n} \PYG{p}{=} \PYG{n}{nome}\PYG{p}{)}
+			    \PYG{k+kr}{then}
+					\PYG{p}{(}\PYG{n}{Int} \PYG{n}{valore}\PYG{p}{)}
+			    \PYG{k+kr}{else}
+					\PYG{p}{(}\PYG{n}{e} \PYG{n}{n}\PYG{p}{)):} \PYG{n}{ambiente}\PYG{p}{;}
+\end{Verbatim}

@@ -1,0 +1,84 @@
+\section{Giugno 2017}
+
+\subsection{Turno 1}
+
+\subsubsection{Testo}
+
+Si scriva una funzione \texttt{sommali} (avente tipo \texttt{int -> int list -> int}) che riceve come argomento un intero \texttt{n} ed una lista di interi \texttt{l}.
+La funzione \texttt{sommali} somma ad \texttt{n} gli elementi di \texttt{l} che hanno posizione \emph{pari} (se la lista contiene meno di 2 elementi, \texttt{sommali} ritorna \texttt{n}).
+
+\medskip
+Come esempio, l'invocazione
+
+\begin{smlcode}
+sommali 0 [1,2];
+\end{smlcode}
+
+deve avere risultato 2;
+
+\begin{smlcode}
+sommali 1 [1,2,3];
+\end{smlcode}
+
+deve avere risultato 3;
+
+\begin{smlcode}
+sommali 2 [1,2,3,4];
+\end{smlcode}
+
+deve avere risultato 8.
+
+\subsubsection{Soluzione}
+
+
+\begin{listing}{!h}
+\smlfile{assets/codes/2017.06/sommali-1.sml}
+\caption[funzione \texttt{sommali} -- Turno 1]{Definizione della funzione \texttt{sommali}}
+\end{listing}
+
+\subsection{Commento della soluzione}
+
+Vedi agosto '15, giugno '16.
+
+\subsection*{Esempio di esecuzione}
+
+\subsection{Turno 2}
+
+\subsubsection{Testo}
+
+Si scriva una funzione \texttt{sommali} (avente tipo \texttt{int -> int list -> int}) che riceve come argomento un intero \texttt{n} ed una lista di interi \texttt{l}.
+La funzione \texttt{sommali} somma ad \texttt{n} gli elementi di \texttt{l} che hanno posizione \emph{multipla di 3} (se la lista contiene meno di 3 elementi, \texttt{sommali} ritorna \texttt{n}).
+
+\medskip
+Come esempio, l'invocazione
+
+\begin{smlcode}
+sommali 0 [1,2,3];
+\end{smlcode}
+
+deve avere risultato 3,
+
+\begin{smlcode}
+sommali 1 [1,2,3];
+\end{smlcode}
+
+deve avere risultato 4: e
+
+\begin{smlcode}
+sommali 2 [1,2,3,4,5,6];
+\end{smlcode}
+
+deve avere risultato 11.
+
+\subsubsection{Soluzione}
+
+\begin{listing}{!h}
+\smlfile{assets/codes/2017.06/sommali-2.sml}
+\caption[funzione sommali -- turno 2]{Definizione della funzione \texttt{sommali}}
+\end{listing}
+
+\subsection{Commento della soluzione}
+
+Vedi agosto '15, giugno '16.
+
+\subsection*{Esempio di esecuzione}
