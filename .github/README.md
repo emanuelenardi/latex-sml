@@ -18,7 +18,7 @@ Le soluzioni, ove presenti, sono quelle fornite dal Prof.re Abeni.
 |           |        2015        |    2016    | 2017 | 2018 |    2019    |
 |-----------|:------------------:|:----------:|:----:|:----:|:----------:|
 | gennaio   |         :o:        |     :o:    |  :x: |  :x: |     :o:    |
-| febbraio  |     :bangbang:     |     :o:    |  :x: |  :x: |     :o:    |
+| febbraio  |         :o:        |     :o:    |  :x: |  :x: |     :o:    |
 | giugno    | :heavy_check_mark: |     :x:    |  :x: |  :x: |      -     |
 | luglio    |         :x:        |     :x:    |  :x: |  :x: |      -     |
 | agosto    |         :x:        |     :x:    |   -  |   -  |      -     |
