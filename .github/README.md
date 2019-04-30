@@ -50,7 +50,7 @@ Miglioramenti che vorrei apportare (in ordine di importanza):
 
 Grazie di cuore :pray:
 
-Puoi scaricare le soluzioni degli appelli (prive di testo, spiegazioni ed esempi) dall'[ultima release](https://github.com/emanuelenardi/latex-sml/releases/latest/) :link:
+Puoi scaricare le soluzioni degli appelli (prive di testo, spiegazioni ed esempi) e gli esami commentati dall'[ultima release](https://github.com/emanuelenardi/latex-sml/releases/latest/).
 
 ## Sostenitori del progetto
 
