@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYG{n}{\PYGZgt{}} \PYG{n}{zero}\PYG{p}{;}
-\PYG{k+kr}{val} \PYG{n+nv}{it} \PYG{p}{=} \PYG{n}{zero}\PYG{p}{:} \PYG{n}{naturale}
-
-\PYG{n}{\PYGZgt{}} \PYG{n}{successivo}\PYG{p}{(}\PYG{n}{successivo} \PYG{n}{zero}\PYG{p}{);}
-\PYG{k+kr}{val} \PYG{n+nv}{it} \PYG{p}{=} \PYG{n}{successivo} \PYG{p}{(}\PYG{n}{successivo} \PYG{n}{zero}\PYG{p}{):} \PYG{n}{naturale}
-\end{Verbatim}

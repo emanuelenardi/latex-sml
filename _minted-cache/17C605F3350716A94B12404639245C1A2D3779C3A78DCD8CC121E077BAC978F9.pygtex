@@ -1,6 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYG{k+kr}{val} \PYG{n+nv}{rec} \PYG{n}{somma} \PYG{p}{=} \PYG{k+kr}{fn} \PYG{n}{zero}          \PYG{p}{=\PYGZgt{}} \PYG{p}{(}\PYG{k+kr}{fn} \PYG{n}{n} \PYG{p}{=\PYGZgt{}} \PYG{n}{n}\PYG{p}{)}
-				 \PYG{n}{|} \PYG{n}{successivo}\PYG{p}{(}\PYG{n}{a}\PYG{p}{)} \PYG{p}{=\PYGZgt{}} \PYG{p}{(}\PYG{k+kr}{fn} \PYG{n}{n} \PYG{p}{=\PYGZgt{}} \PYG{p}{(}\PYG{n}{somma} \PYG{n}{a} \PYG{p}{(}\PYG{n}{successivo}\PYG{p}{(}\PYG{n}{n}\PYG{p}{))));}
-
-\PYG{k+kr}{val} \PYG{n+nv}{somma} \PYG{p}{=} \PYG{k+kr}{fn}\PYG{p}{:} \PYG{n}{naturale} \PYG{p}{\PYGZhy{}\PYGZgt{}} \PYG{n}{naturale} \PYG{p}{\PYGZhy{}\PYGZgt{}} \PYG{n}{naturale}
-\end{Verbatim}

@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYG{k+kr}{val} \PYG{n+nv}{rec} \PYG{n}{eval} \PYG{p}{=} \PYG{k+kr}{fn} \PYG{n}{For} \PYG{p}{(}\PYG{n}{n}\PYG{p}{,} \PYG{n}{f}\PYG{p}{)} \PYG{p}{=\PYGZgt{}}
-		\PYG{k+kr}{fn} \PYG{n}{x} \PYG{p}{=\PYGZgt{}} \PYG{k+kr}{if} \PYG{p}{(}\PYG{n}{n} \PYG{n}{\PYGZgt{}} \PYG{l+m+mi}{1}\PYG{p}{)} \PYG{k+kr}{then}
-						       \PYG{n}{eval} \PYG{p}{(}\PYG{n}{For} \PYG{p}{(}\PYG{n}{n} \PYG{n}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{f}\PYG{p}{))} \PYG{p}{(}\PYG{n}{f} \PYG{n}{x}\PYG{p}{)}
-						   \PYG{k+kr}{else}
-						       \PYG{n}{x}\PYG{p}{;}
-\end{Verbatim}
