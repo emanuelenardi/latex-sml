@@ -1,5 +1,3 @@
-cd ..
-
 arara intro-sml
 pause
 
